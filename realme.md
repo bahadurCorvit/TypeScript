@@ -5902,6 +5902,6562 @@ Understanding OOP helps developers build:
 - Maintainable codebases
 - Professional software solutions
 
+# 11. Generics in TypeScript
 
+Generics allow developers to create reusable and flexible components that work with multiple data types while maintaining type safety.
+
+Generics are one of the most powerful features in TypeScript.
+
+---
+
+# Why Generics are Important
+
+Generics help developers:
+
+- Avoid code duplication
+- Create reusable logic
+- Maintain type safety
+- Build scalable applications
+- Write flexible code
+
+---
+
+# Problem Without Generics
+
+Without generics, developers often repeat the same code for different data types.
+
+---
+
+# Example Without Generics
+
+```ts
+function stringValue(value: string): string {
+  return value;
+}
+
+function numberValue(value: number): number {
+  return value;
+}
+```
+
+This creates duplicate logic.
+
+---
+
+# What is a Generic?
+
+A generic allows a function, class, or interface to work with multiple types dynamically.
+
+---
+
+# Generic Syntax
+
+```ts
+function functionName<T>(value: T): T {
+  return value;
+}
+```
+
+`T` represents a generic type.
+
+---
+
+# First Generic Function
+
+```ts
+function identity<T>(value: T): T {
+  return value;
+}
+```
+
+---
+
+# Usage
+
+```ts
+console.log(identity<string>("Hello"));
+console.log(identity<number>(100));
+```
+
+---
+
+# Output
+
+```bash
+Hello
+100
+```
+
+---
+
+# How Generics Work
+
+TypeScript replaces `T` with the actual provided type.
+
+---
+
+# Generic with Type Inference
+
+TypeScript can automatically detect generic types.
+
+---
+
+# Example
+
+```ts
+console.log(identity("TypeScript"));
+console.log(identity(500));
+```
+
+---
+
+# Generic Arrays
+
+Generics work with arrays.
+
+---
+
+# Example
+
+```ts
+function getFirst<T>(items: T[]): T {
+  return items[0];
+}
+```
+
+---
+
+# Usage
+
+```ts
+console.log(getFirst<number>([1, 2, 3]));
+console.log(getFirst<string>(["Ali", "Ahmed"]));
+```
+
+---
+
+# Output
+
+```bash
+1
+Ali
+```
+
+---
+
+# Multiple Generic Types
+
+Generics can use multiple type parameters.
+
+---
+
+# Example
+
+```ts
+function combine<T, U>(
+  first: T,
+  second: U
+) {
+  return {
+    first,
+    second
+  };
+}
+```
+
+---
+
+# Usage
+
+```ts
+console.log(combine<string, number>("Age", 22));
+```
+
+---
+
+# Output
+
+```bash
+{
+  first: 'Age',
+  second: 22
+}
+```
+
+---
+
+# Generic Interfaces
+
+Interfaces can use generics.
+
+---
+
+# Example
+
+```ts
+interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+}
+```
+
+---
+
+# Usage
+
+```ts
+const response: ApiResponse<string> = {
+  success: true,
+  data: "Data Loaded"
+};
+```
+
+---
+
+# Generic Interface with Object
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+
+const userResponse: ApiResponse<User> = {
+  success: true,
+  data: {
+    name: "Ali",
+    age: 22
+  }
+};
+```
+
+---
+
+# Generic Classes
+
+Classes can also use generics.
+
+---
+
+# Example
+
+```ts
+class Box<T> {
+  content: T;
+
+  constructor(content: T) {
+    this.content = content;
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+const stringBox = new Box<string>("Hello");
+
+console.log(stringBox.content);
+```
+
+---
+
+# Output
+
+```bash
+Hello
+```
+
+---
+
+# Generic Constraints
+
+Constraints limit what types can be used.
+
+---
+
+# Example
+
+```ts
+function printLength<T extends { length: number }>(
+  item: T
+): void {
+  console.log(item.length);
+}
+```
+
+---
+
+# Usage
+
+```ts
+printLength("Hello");
+printLength([1, 2, 3]);
+```
+
+---
+
+# Output
+
+```bash
+5
+3
+```
+
+---
+
+# Invalid Generic Usage
+
+```ts
+printLength(100);
+```
+
+This produces an error because numbers do not have `length`.
+
+---
+
+# Generic with keyof
+
+`keyof` works with object keys.
+
+---
+
+# Example
+
+```ts
+function getValue<T, K extends keyof T>(
+  obj: T,
+  key: K
+) {
+  return obj[key];
+}
+```
+
+---
+
+# Usage
+
+```ts
+const user = {
+  name: "Ali",
+  age: 22
+};
+
+console.log(getValue(user, "name"));
+```
+
+---
+
+# Output
+
+```bash
+Ali
+```
+
+---
+
+# Generic Type Aliases
+
+Type aliases can use generics.
+
+---
+
+# Example
+
+```ts
+type ApiResult<T> = {
+  success: boolean;
+  data: T;
+};
+```
+
+---
+
+# Usage
+
+```ts
+const result: ApiResult<number> = {
+  success: true,
+  data: 100
+};
+```
+
+---
+
+# Generic Default Types
+
+Generics can have default types.
+
+---
+
+# Example
+
+```ts
+interface User<T = string> {
+  value: T;
+}
+```
+
+---
+
+# Usage
+
+```ts
+const user: User = {
+  value: "Ali"
+};
+```
+
+---
+
+# Generic Utility Function
+
+```ts
+function createArray<T>(
+  value: T,
+  count: number
+): T[] {
+  return Array(count).fill(value);
+}
+```
+
+---
+
+# Usage
+
+```ts
+console.log(createArray<string>("TS", 3));
+```
+
+---
+
+# Output
+
+```bash
+["TS", "TS", "TS"]
+```
+
+---
+
+# Generic Promise
+
+Promises can use generics.
+
+---
+
+# Example
+
+```ts
+function fetchData(): Promise<string> {
+  return Promise.resolve("Data Loaded");
+}
+```
+
+---
+
+# Usage
+
+```ts
+fetchData().then(data => {
+  console.log(data);
+});
+```
+
+---
+
+# Output
+
+```bash
+Data Loaded
+```
+
+---
+
+# Generic Repository Pattern
+
+Generics are widely used in professional applications.
+
+---
+
+# Example
+
+```ts
+class Repository<T> {
+  private items: T[] = [];
+
+  add(item: T): void {
+    this.items.push(item);
+  }
+
+  getAll(): T[] {
+    return this.items;
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+const users = new Repository<string>();
+
+users.add("Ali");
+users.add("Ahmed");
+
+console.log(users.getAll());
+```
+
+---
+
+# Output
+
+```bash
+["Ali", "Ahmed"]
+```
+
+---
+
+# Generic with Interfaces & Classes
+
+```ts
+interface Product {
+  name: string;
+  price: number;
+}
+
+class Store<T> {
+  items: T[] = [];
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+const productStore = new Store<Product>();
+
+productStore.addItem({
+  name: "Laptop",
+  price: 1200
+});
+```
+
+---
+
+# Built-in Generic Types
+
+TypeScript provides many built-in generic types.
+
+---
+
+# Array
+
+```ts
+let numbers: Array<number> = [1, 2, 3];
+```
+
+---
+
+# Promise
+
+```ts
+let promise: Promise<string>;
+```
+
+---
+
+# Map
+
+```ts
+let users = new Map<number, string>();
+```
+
+---
+
+# Set
+
+```ts
+let ids = new Set<number>();
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Overcomplicated generics | Hard readability |
+| Using any instead of generics | Unsafe code |
+| Missing constraints | Invalid operations |
+| Too many generic parameters | Complex architecture |
+
+---
+
+# Best Practices
+
+- Use meaningful generic names
+- Prefer reusable generic components
+- Use constraints when needed
+- Avoid unnecessary complexity
+- Keep generics readable
+
+---
+
+# Generic Naming Conventions
+
+| Generic | Meaning |
+|---|---|
+| T | Type |
+| K | Key |
+| V | Value |
+| U | Secondary Type |
+
+---
+
+# Real-world Example
+
+```ts
+interface ApiResponse<T> {
+  status: number;
+  data: T;
+}
+
+interface User {
+  id: number;
+  name: string;
+}
+
+const response: ApiResponse<User> = {
+  status: 200,
+  data: {
+    id: 1,
+    name: "Ali"
+  }
+};
+
+console.log(response);
+```
+
+---
+
+# Output
+
+```bash
+{
+  status: 200,
+  data: {
+    id: 1,
+    name: 'Ali'
+  }
+}
+```
+
+---
+
+# Advantages of Generics
+
+- Reusable code
+- Strong type safety
+- Better scalability
+- Cleaner architecture
+- Flexible development
+
+---
+
+# Conclusion
+
+Generics are one of the most powerful features in TypeScript.
+
+They help developers build:
+
+- Reusable components
+- Professional applications
+- Scalable systems
+- Flexible architectures
+- Type-safe solutions
+
+# 12. Modules & File Structure in TypeScript
+
+Modules help developers organize code into separate reusable files.
+
+A proper file structure improves:
+
+- Scalability
+- Maintainability
+- Readability
+- Team collaboration
+- Professional architecture
+
+---
+
+# What is a Module?
+
+A module is a file containing reusable code.
+
+Each TypeScript file becomes a module when it uses:
+
+- `export`
+- `import`
+
+---
+
+# Why Use Modules?
+
+Modules help developers:
+
+- Split large applications
+- Reuse code
+- Avoid duplicate logic
+- Organize files professionally
+- Improve scalability
+
+---
+
+# Basic Module Structure
+
+```bash
+project/
+│
+├── src/
+│   ├── app.ts
+│   ├── user.ts
+│   └── product.ts
+│
+├── dist/
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+---
+
+# Exporting Code
+
+`export` allows code to be used in other files.
+
+---
+
+# Named Export
+
+## user.ts
+
+```ts
+export const username: string = "Ali";
+```
+
+---
+
+# Importing Named Export
+
+## app.ts
+
+```ts
+import { username } from "./user";
+
+console.log(username);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+```
+
+---
+
+# Export Multiple Values
+
+## math.ts
+
+```ts
+export const add = (
+  a: number,
+  b: number
+): number => a + b;
+
+export const subtract = (
+  a: number,
+  b: number
+): number => a - b;
+```
+
+---
+
+# Import Multiple Values
+
+## app.ts
+
+```ts
+import { add, subtract } from "./math";
+
+console.log(add(10, 5));
+console.log(subtract(20, 5));
+```
+
+---
+
+# Output
+
+```bash
+15
+15
+```
+
+---
+
+# Default Export
+
+A file can contain one default export.
+
+---
+
+# Example
+
+## user.ts
+
+```ts
+export default class User {
+  constructor(
+    public name: string
+  ) {}
+}
+```
+
+---
+
+# Import Default Export
+
+## app.ts
+
+```ts
+import User from "./user";
+
+const user = new User("Ahmed");
+
+console.log(user.name);
+```
+
+---
+
+# Output
+
+```bash
+Ahmed
+```
+
+---
+
+# Difference Between Named & Default Export
+
+| Named Export | Default Export |
+|---|---|
+| Multiple allowed | Only one allowed |
+| Imported with braces | Imported without braces |
+| Better for utilities | Better for main modules |
+
+---
+
+# Export All
+
+`export *` re-exports everything.
+
+---
+
+# Example
+
+## utils/index.ts
+
+```ts
+export * from "./math";
+export * from "./string";
+```
+
+---
+
+# Import All
+
+```ts
+import * as MathUtils from "./math";
+
+console.log(MathUtils.add(5, 5));
+```
+
+---
+
+# Output
+
+```bash
+10
+```
+
+---
+
+# Aliasing Imports
+
+Imports can be renamed.
+
+---
+
+# Example
+
+```ts
+import { add as sum } from "./math";
+
+console.log(sum(10, 5));
+```
+
+---
+
+# Output
+
+```bash
+15
+```
+
+---
+
+# Organizing Project Structure
+
+Professional applications separate code into folders.
+
+---
+
+# Recommended Structure
+
+```bash
+src/
+│
+├── components/
+├── services/
+├── controllers/
+├── models/
+├── interfaces/
+├── utils/
+├── config/
+├── types/
+└── app.ts
+```
+
+---
+
+# Folder Explanation
+
+| Folder | Purpose |
+|---|---|
+| components | Reusable UI components |
+| services | Business logic |
+| controllers | Request handling |
+| models | Data structures |
+| interfaces | TypeScript interfaces |
+| utils | Helper functions |
+| config | Configuration files |
+| types | Shared custom types |
+
+---
+
+# Example Utility Module
+
+## utils/string.ts
+
+```ts
+export function capitalize(
+  value: string
+): string {
+  return value.toUpperCase();
+}
+```
+
+---
+
+# Usage
+
+## app.ts
+
+```ts
+import { capitalize } from "./utils/string";
+
+console.log(capitalize("typescript"));
+```
+
+---
+
+# Output
+
+```bash
+TYPESCRIPT
+```
+
+---
+
+# Path Aliases
+
+Path aliases simplify imports.
+
+---
+
+# Without Path Alias
+
+```ts
+import { User } from "../../../../models/user";
+```
+
+---
+
+# With Path Alias
+
+```ts
+import { User } from "@models/user";
+```
+
+---
+
+# Configure Path Aliases
+
+## tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@models/*": ["models/*"],
+      "@utils/*": ["utils/*"]
+    }
+  }
+}
+```
+
+---
+
+# Index Files
+
+Index files simplify exports.
+
+---
+
+# Example
+
+## services/index.ts
+
+```ts
+export * from "./authService";
+export * from "./userService";
+```
+
+---
+
+# Usage
+
+```ts
+import { login } from "./services";
+```
+
+---
+
+# Module Resolution
+
+TypeScript automatically resolves imported modules.
+
+---
+
+# Common Module Types
+
+| Module Type | Description |
+|---|---|
+| CommonJS | Node.js default |
+| ES Modules | Modern JavaScript modules |
+
+---
+
+# CommonJS Example
+
+```ts
+module.exports = {};
+```
+
+---
+
+# ES Module Example
+
+```ts
+export {};
+```
+
+---
+
+# Configure Module System
+
+## tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs"
+  }
+}
+```
+
+---
+
+# Dynamic Imports
+
+Dynamic imports load modules when needed.
+
+---
+
+# Example
+
+```ts
+async function loadModule() {
+  const math = await import("./math");
+
+  console.log(math.add(5, 5));
+}
+```
+
+---
+
+# Output
+
+```bash
+10
+```
+
+---
+
+# Namespace vs Modules
+
+| Namespace | Modules |
+|---|---|
+| Older approach | Modern approach |
+| Global scope | File-based scope |
+| Less scalable | Highly scalable |
+
+---
+
+# Barrel Exports
+
+Barrel exports combine multiple exports.
+
+---
+
+# Example
+
+## index.ts
+
+```ts
+export * from "./user";
+export * from "./product";
+export * from "./order";
+```
+
+---
+
+# Benefits of Barrel Exports
+
+- Cleaner imports
+- Better organization
+- Easier scalability
+
+---
+
+# Real-world Example
+
+## interfaces/User.ts
+
+```ts
+export interface User {
+  id: number;
+  name: string;
+}
+```
+
+---
+
+## services/userService.ts
+
+```ts
+import { User } from "../interfaces/User";
+
+export function getUser(): User {
+  return {
+    id: 1,
+    name: "Ali"
+  };
+}
+```
+
+---
+
+## app.ts
+
+```ts
+import { getUser } from "./services/userService";
+
+console.log(getUser());
+```
+
+---
+
+# Output
+
+```bash
+{
+  id: 1,
+  name: 'Ali'
+}
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Large single files | Poor scalability |
+| Circular imports | Runtime issues |
+| Poor folder naming | Confusing structure |
+| Deep nested imports | Hard maintenance |
+
+---
+
+# Best Practices
+
+- Use small reusable modules
+- Separate business logic
+- Use index files wisely
+- Organize folders properly
+- Avoid circular dependencies
+- Use path aliases in large projects
+
+---
+
+# Professional Architecture Example
+
+```bash
+src/
+│
+├── api/
+├── controllers/
+├── database/
+├── middleware/
+├── models/
+├── routes/
+├── services/
+├── types/
+├── utils/
+└── app.ts
+```
+
+---
+
+# Advantages of Modules
+
+- Reusable code
+- Better maintainability
+- Scalable architecture
+- Cleaner structure
+- Team-friendly development
+
+---
+
+# Conclusion
+
+Modules and proper file structure are essential for professional TypeScript development.
+
+They help developers create:
+
+- Organized applications
+- Scalable architectures
+- Maintainable systems
+- Reusable components
+- Enterprise-level projects
+
+# 13. Error Handling & Debugging in TypeScript
+
+Error handling and debugging are essential for building stable and professional TypeScript applications.
+
+They help developers:
+
+- Prevent application crashes
+- Detect bugs quickly
+- Improve code quality
+- Build reliable systems
+- Handle unexpected situations safely
+
+---
+
+# What is Error Handling?
+
+Error handling is the process of managing runtime problems in an application.
+
+Examples:
+
+- Invalid input
+- API failures
+- Database errors
+- File errors
+- Authentication issues
+
+---
+
+# Why Error Handling is Important
+
+Without proper error handling:
+
+- Applications may crash
+- Data may become corrupted
+- User experience becomes poor
+- Debugging becomes difficult
+
+---
+
+# Types of Errors in TypeScript
+
+| Error Type | Description |
+|---|---|
+| Syntax Error | Invalid code syntax |
+| Type Error | Wrong data type |
+| Runtime Error | Error during execution |
+| Logical Error | Wrong program logic |
+
+---
+
+# Syntax Error Example
+
+```ts
+let name: string = ;
+```
+
+This produces a syntax error.
+
+---
+
+# Type Error Example
+
+```ts
+let age: number = "Twenty";
+```
+
+TypeScript catches this during compilation.
+
+---
+
+# Runtime Error Example
+
+```ts
+const user = undefined;
+
+console.log(user.name);
+```
+
+This crashes during runtime.
+
+---
+
+# What is Debugging?
+
+Debugging is the process of finding and fixing errors in code.
+
+---
+
+# Common Debugging Methods
+
+- Console logging
+- VS Code debugger
+- Breakpoints
+- Error messages
+- Source maps
+
+---
+
+# Console Logging
+
+`console.log()` helps inspect values.
+
+---
+
+# Example
+
+```ts
+let username: string = "Ali";
+
+console.log(username);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+```
+
+---
+
+# Debug Multiple Values
+
+```ts
+let name: string = "Ahmed";
+let age: number = 22;
+
+console.log(name, age);
+```
+
+---
+
+# Output
+
+```bash
+Ahmed 22
+```
+
+---
+
+# try...catch Statement
+
+`try...catch` handles runtime errors safely.
+
+---
+
+# Basic Syntax
+
+```ts
+try {
+  // risky code
+} catch (error) {
+  // error handling
+}
+```
+
+---
+
+# Basic Example
+
+```ts
+try {
+  throw new Error("Something went wrong");
+} catch (error) {
+  console.log(error);
+}
+```
+
+---
+
+# Output
+
+```bash
+Error: Something went wrong
+```
+
+---
+
+# Real-world Example
+
+```ts
+try {
+  const result = JSON.parse("invalid json");
+
+  console.log(result);
+} catch (error) {
+  console.log("Invalid JSON");
+}
+```
+
+---
+
+# Output
+
+```bash
+Invalid JSON
+```
+
+---
+
+# finally Block
+
+`finally` always runs whether an error occurs or not.
+
+---
+
+# Example
+
+```ts
+try {
+  console.log("Running...");
+} catch (error) {
+  console.log(error);
+} finally {
+  console.log("Finished");
+}
+```
+
+---
+
+# Output
+
+```bash
+Running...
+Finished
+```
+
+---
+
+# Throwing Custom Errors
+
+Developers can create custom errors.
+
+---
+
+# Example
+
+```ts
+function divide(
+  a: number,
+  b: number
+): number {
+  if (b === 0) {
+    throw new Error("Division by zero is not allowed");
+  }
+
+  return a / b;
+}
+```
+
+---
+
+# Usage
+
+```ts
+try {
+  console.log(divide(10, 0));
+} catch (error) {
+  console.log(error);
+}
+```
+
+---
+
+# Output
+
+```bash
+Error: Division by zero is not allowed
+```
+
+---
+
+# Error Object
+
+The `Error` object contains useful information.
+
+---
+
+# Example
+
+```ts
+try {
+  throw new Error("Server Error");
+} catch (error) {
+  console.log(error.message);
+}
+```
+
+---
+
+# Output
+
+```bash
+Server Error
+```
+
+---
+
+# Custom Error Classes
+
+TypeScript allows creating custom error classes.
+
+---
+
+# Example
+
+```ts
+class ValidationError extends Error {
+  constructor(message: string) {
+    super(message);
+
+    this.name = "ValidationError";
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+throw new ValidationError("Invalid Email");
+```
+
+---
+
+# Output
+
+```bash
+ValidationError: Invalid Email
+```
+
+---
+
+# Async Error Handling
+
+Async operations should use `try...catch`.
+
+---
+
+# Example
+
+```ts
+async function fetchData() {
+  try {
+    throw new Error("API Failed");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+fetchData();
+```
+
+---
+
+# Output
+
+```bash
+Error: API Failed
+```
+
+---
+
+# Promise Error Handling
+
+Promises use `.catch()`.
+
+---
+
+# Example
+
+```ts
+Promise.reject("Failed")
+  .catch(error => {
+    console.log(error);
+  });
+```
+
+---
+
+# Output
+
+```bash
+Failed
+```
+
+---
+
+# Debugging with VS Code
+
+VS Code provides powerful debugging tools.
+
+---
+
+# Features
+
+- Breakpoints
+- Step execution
+- Variable inspection
+- Call stack analysis
+
+---
+
+# Add Breakpoint
+
+Click beside the line number in VS Code.
+
+---
+
+# Start Debugging
+
+Shortcut:
+
+```bash
+F5
+```
+
+---
+
+# Source Maps
+
+Source maps connect compiled JavaScript to original TypeScript code.
+
+---
+
+# Enable Source Maps
+
+## tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "sourceMap": true
+  }
+}
+```
+
+---
+
+# Benefits of Source Maps
+
+- Easier debugging
+- Better stack traces
+- Direct TypeScript debugging
+
+---
+
+# Assertions for Validation
+
+Assertions help validate conditions.
+
+---
+
+# Example
+
+```ts
+function assert(
+  condition: boolean,
+  message: string
+): void {
+  if (!condition) {
+    throw new Error(message);
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+assert(5 > 10, "Invalid Condition");
+```
+
+---
+
+# Output
+
+```bash
+Error: Invalid Condition
+```
+
+---
+
+# Optional Chaining
+
+Optional chaining prevents runtime crashes.
+
+---
+
+# Example
+
+```ts
+const user = {
+  profile: {
+    name: "Ali"
+  }
+};
+
+console.log(user.profile?.name);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+```
+
+---
+
+# Nullish Coalescing
+
+Provides default values safely.
+
+---
+
+# Example
+
+```ts
+let username: string | null = null;
+
+console.log(username ?? "Guest");
+```
+
+---
+
+# Output
+
+```bash
+Guest
+```
+
+---
+
+# Logging Errors Professionally
+
+Bad practice:
+
+```ts
+console.log(error);
+```
+
+---
+
+# Better Practice
+
+```ts
+console.error("Application Error:", error);
+```
+
+---
+
+# Input Validation
+
+Always validate user input.
+
+---
+
+# Example
+
+```ts
+function register(age: number) {
+  if (age < 18) {
+    throw new Error("Age must be 18 or above");
+  }
+
+  console.log("Registered");
+}
+```
+
+---
+
+# Common Debugging Techniques
+
+| Technique | Purpose |
+|---|---|
+| console.log | Inspect values |
+| Breakpoints | Pause execution |
+| Stack traces | Track errors |
+| Source maps | Debug TS directly |
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Ignoring errors | Unstable apps |
+| Using any everywhere | Hidden bugs |
+| No input validation | Runtime failures |
+| Empty catch blocks | Difficult debugging |
+
+---
+
+# Best Practices
+
+- Always handle errors properly
+- Use meaningful error messages
+- Validate user input
+- Use source maps
+- Avoid silent failures
+- Use custom error classes when needed
+
+---
+
+# Real-world Example
+
+```ts
+class AuthenticationError extends Error {
+  constructor(message: string) {
+    super(message);
+
+    this.name = "AuthenticationError";
+  }
+}
+
+function login(
+  username: string,
+  password: string
+): void {
+  if (!username || !password) {
+    throw new AuthenticationError(
+      "Username and password are required"
+    );
+  }
+
+  console.log("Login Successful");
+}
+
+try {
+  login("", "");
+} catch (error) {
+  console.error(error);
+}
+```
+
+---
+
+# Output
+
+```bash
+AuthenticationError: Username and password are required
+```
+
+---
+
+# Advantages of Proper Error Handling
+
+- Better stability
+- Improved user experience
+- Easier debugging
+- Safer applications
+- Professional architecture
+
+---
+
+# Conclusion
+
+Error handling and debugging are critical skills for professional TypeScript development.
+
+They help developers build:
+
+- Reliable systems
+- Stable applications
+- Scalable architectures
+- Professional software
+- Production-ready applications
+
+# 14. Async Programming in TypeScript
+
+Async programming allows applications to perform tasks without blocking execution.
+
+It is used for:
+
+- API requests
+- Database operations
+- File handling
+- Timers
+- Authentication systems
+- Background tasks
+
+---
+
+# What is Synchronous Programming?
+
+Synchronous code runs line by line.
+
+Each task waits for the previous task to finish.
+
+---
+
+# Example
+
+```ts
+console.log("Start");
+
+console.log("Process");
+
+console.log("End");
+```
+
+---
+
+# Output
+
+```bash
+Start
+Process
+End
+```
+
+---
+
+# Problem with Synchronous Code
+
+Long-running tasks block the application.
+
+Examples:
+
+- API requests
+- Database queries
+- File uploads
+
+---
+
+# What is Asynchronous Programming?
+
+Asynchronous programming allows tasks to run in the background without blocking the application.
+
+---
+
+# Example
+
+```ts
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Processing");
+}, 2000);
+
+console.log("End");
+```
+
+---
+
+# Output
+
+```bash
+Start
+End
+Processing
+```
+
+---
+
+# What is a Callback?
+
+A callback is a function passed into another function.
+
+---
+
+# Callback Example
+
+```ts
+function greet(
+  name: string,
+  callback: () => void
+) {
+  console.log(`Hello ${name}`);
+
+  callback();
+}
+
+greet("Ali", () => {
+  console.log("Callback Executed");
+});
+```
+
+---
+
+# Output
+
+```bash
+Hello Ali
+Callback Executed
+```
+
+---
+
+# Callback Problems
+
+Large callback chains create:
+
+- Callback Hell
+- Difficult debugging
+- Poor readability
+
+---
+
+# What is a Promise?
+
+A Promise represents a future result.
+
+Promises improve asynchronous code readability.
+
+---
+
+# Promise States
+
+| State | Description |
+|---|---|
+| Pending | Waiting |
+| Fulfilled | Success |
+| Rejected | Failed |
+
+---
+
+# Basic Promise Syntax
+
+```ts
+const promise = new Promise((resolve, reject) => {
+  // async task
+});
+```
+
+---
+
+# Simple Promise Example
+
+```ts
+const myPromise = new Promise<string>(
+  (resolve, reject) => {
+    resolve("Data Loaded");
+  }
+);
+```
+
+---
+
+# Using Promise
+
+```ts
+myPromise.then(data => {
+  console.log(data);
+});
+```
+
+---
+
+# Output
+
+```bash
+Data Loaded
+```
+
+---
+
+# Promise Rejection
+
+```ts
+const login = new Promise(
+  (resolve, reject) => {
+    reject("Invalid Credentials");
+  }
+);
+```
+
+---
+
+# Handle Error
+
+```ts
+login.catch(error => {
+  console.log(error);
+});
+```
+
+---
+
+# Output
+
+```bash
+Invalid Credentials
+```
+
+---
+
+# Promise Chaining
+
+Promises can be chained using `.then()`.
+
+---
+
+# Example
+
+```ts
+Promise.resolve(5)
+  .then(value => value * 2)
+  .then(value => value + 10)
+  .then(result => {
+    console.log(result);
+  });
+```
+
+---
+
+# Output
+
+```bash
+20
+```
+
+---
+
+# Async & Await
+
+`async/await` simplifies asynchronous programming.
+
+---
+
+# Async Function
+
+```ts
+async function fetchData() {
+  return "Data Loaded";
+}
+```
+
+---
+
+# Using Async Function
+
+```ts
+fetchData().then(data => {
+  console.log(data);
+});
+```
+
+---
+
+# Output
+
+```bash
+Data Loaded
+```
+
+---
+
+# Await Keyword
+
+`await` pauses execution until a Promise completes.
+
+---
+
+# Example
+
+```ts
+async function getData() {
+  const result = await Promise.resolve(
+    "TypeScript"
+  );
+
+  console.log(result);
+}
+
+getData();
+```
+
+---
+
+# Output
+
+```bash
+TypeScript
+```
+
+---
+
+# Async Error Handling
+
+Always use `try...catch` with async code.
+
+---
+
+# Example
+
+```ts
+async function loadData() {
+  try {
+    throw new Error("API Failed");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+loadData();
+```
+
+---
+
+# Output
+
+```bash
+Error: API Failed
+```
+
+---
+
+# Fetch API
+
+Fetch API retrieves data from servers.
+
+---
+
+# Example
+
+```ts
+async function getUsers() {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/users"
+  );
+
+  const data = await response.json();
+
+  console.log(data);
+}
+```
+
+---
+
+# HTTP Methods
+
+| Method | Purpose |
+|---|---|
+| GET | Retrieve data |
+| POST | Create data |
+| PUT | Update data |
+| DELETE | Remove data |
+
+---
+
+# GET Request Example
+
+```ts
+async function getPosts() {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/posts"
+  );
+
+  const posts = await response.json();
+
+  console.log(posts);
+}
+```
+
+---
+
+# POST Request Example
+
+```ts
+async function createPost() {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/posts",
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        title: "TypeScript"
+      })
+    }
+  );
+
+  const data = await response.json();
+
+  console.log(data);
+}
+```
+
+---
+
+# Promise.all()
+
+Runs multiple promises simultaneously.
+
+---
+
+# Example
+
+```ts
+async function loadAll() {
+  const results = await Promise.all([
+    Promise.resolve("Users"),
+    Promise.resolve("Products")
+  ]);
+
+  console.log(results);
+}
+
+loadAll();
+```
+
+---
+
+# Output
+
+```bash
+["Users", "Products"]
+```
+
+---
+
+# Promise.race()
+
+Returns the first completed promise.
+
+---
+
+# Example
+
+```ts
+Promise.race([
+  new Promise(resolve =>
+    setTimeout(() => resolve("Fast"), 1000)
+  ),
+
+  new Promise(resolve =>
+    setTimeout(() => resolve("Slow"), 3000)
+  )
+]).then(result => {
+  console.log(result);
+});
+```
+
+---
+
+# Output
+
+```bash
+Fast
+```
+
+---
+
+# setTimeout()
+
+Executes code after delay.
+
+---
+
+# Example
+
+```ts
+setTimeout(() => {
+  console.log("Executed");
+}, 2000);
+```
+
+---
+
+# setInterval()
+
+Executes code repeatedly.
+
+---
+
+# Example
+
+```ts
+setInterval(() => {
+  console.log("Running");
+}, 1000);
+```
+
+---
+
+# Clearing Interval
+
+```ts
+const interval = setInterval(() => {
+  console.log("Hello");
+}, 1000);
+
+clearInterval(interval);
+```
+
+---
+
+# Async Functions with Types
+
+```ts
+async function getMessage(): Promise<string> {
+  return "Hello";
+}
+```
+
+---
+
+# Generic Async Function
+
+```ts
+async function fetchData<T>(
+  url: string
+): Promise<T> {
+  const response = await fetch(url);
+
+  return response.json();
+}
+```
+
+---
+
+# Example Usage
+
+```ts
+interface User {
+  id: number;
+  name: string;
+}
+
+fetchData<User[]>(
+  "https://jsonplaceholder.typicode.com/users"
+);
+```
+
+---
+
+# Real-world Login Example
+
+```ts
+async function login(
+  username: string,
+  password: string
+): Promise<string> {
+  if (
+    username === "admin" &&
+    password === "123"
+  ) {
+    return "Login Successful";
+  }
+
+  throw new Error("Invalid Credentials");
+}
+```
+
+---
+
+# Usage
+
+```ts
+async function authenticate() {
+  try {
+    const result = await login(
+      "admin",
+      "123"
+    );
+
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+authenticate();
+```
+
+---
+
+# Output
+
+```bash
+Login Successful
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Missing await | Unexpected behavior |
+| Ignoring errors | Application crashes |
+| Callback nesting | Poor readability |
+| Blocking async flow | Slow applications |
+
+---
+
+# Best Practices
+
+- Prefer async/await
+- Always handle errors
+- Avoid callback hell
+- Use Promise.all for parallel tasks
+- Use proper return types
+- Keep async functions clean
+
+---
+
+# Async Architecture Example
+
+```bash
+src/
+│
+├── api/
+├── services/
+├── utils/
+├── interfaces/
+└── app.ts
+```
+
+---
+
+# Advantages of Async Programming
+
+- Better performance
+- Faster applications
+- Improved user experience
+- Non-blocking execution
+- Scalable architecture
+
+---
+
+# Conclusion
+
+Async programming is essential for modern TypeScript development.
+
+Understanding async concepts helps developers build:
+
+- Real-time applications
+- APIs
+- Professional backend systems
+- Scalable web applications
+- Production-ready software
+
+# 15. TypeScript with React
+
+TypeScript with React helps developers build scalable, maintainable, and type-safe frontend applications.
+
+It improves:
+
+- Component safety
+- Developer experience
+- Code quality
+- Scalability
+- Team collaboration
+
+---
+
+# Why Use TypeScript with React?
+
+React applications become complex as they grow.
+
+TypeScript helps by providing:
+
+- Static typing
+- Better IntelliSense
+- Early error detection
+- Safer props handling
+- Cleaner architecture
+
+---
+
+# Benefits of React + TypeScript
+
+| Benefit | Description |
+|---|---|
+| Type Safety | Prevents invalid data |
+| Better Auto-completion | Faster development |
+| Easier Refactoring | Safe code updates |
+| Better Maintainability | Cleaner structure |
+| Improved Team Collaboration | Predictable code |
+
+---
+
+# Create React App with TypeScript
+
+---
+
+# Using Vite (Recommended)
+
+```bash
+npm create vite@latest my-app -- --template react-ts
+```
+
+---
+
+# Move Into Project
+
+```bash
+cd my-app
+```
+
+---
+
+# Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+# Start Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+# Using Create React App
+
+```bash
+npx create-react-app my-app --template typescript
+```
+
+---
+
+# Project Structure
+
+```bash
+src/
+│
+├── components/
+├── pages/
+├── hooks/
+├── services/
+├── interfaces/
+├── types/
+├── App.tsx
+└── main.tsx
+```
+
+---
+
+# File Extensions in React TypeScript
+
+| Extension | Purpose |
+|---|---|
+| .ts | TypeScript file |
+| .tsx | React TypeScript component |
+
+---
+
+# First React Component
+
+## App.tsx
+
+```tsx
+function App() {
+  return <h1>Hello TypeScript</h1>;
+}
+
+export default App;
+```
+
+---
+
+# Functional Components
+
+Modern React uses functional components.
+
+---
+
+# Example
+
+```tsx
+const Header = () => {
+  return <h1>Welcome</h1>;
+};
+
+export default Header;
+```
+
+---
+
+# Props in React TypeScript
+
+Props should always be typed.
+
+---
+
+# Basic Props Example
+
+```tsx
+type Props = {
+  title: string;
+};
+
+const Header = ({ title }: Props) => {
+  return <h1>{title}</h1>;
+};
+```
+
+---
+
+# Usage
+
+```tsx
+<Header title="TypeScript" />
+```
+
+---
+
+# Multiple Props
+
+```tsx
+type UserProps = {
+  name: string;
+  age: number;
+};
+```
+
+---
+
+# Component Example
+
+```tsx
+const User = ({
+  name,
+  age
+}: UserProps) => {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>{age}</p>
+    </div>
+  );
+};
+```
+
+---
+
+# Optional Props
+
+Optional props use `?`.
+
+---
+
+# Example
+
+```tsx
+type ButtonProps = {
+  text: string;
+  color?: string;
+};
+```
+
+---
+
+# Default Props
+
+```tsx
+const Button = ({
+  text,
+  color = "blue"
+}: ButtonProps) => {
+  return (
+    <button>{text}</button>
+  );
+};
+```
+
+---
+
+# Children Props
+
+React components can receive children.
+
+---
+
+# Example
+
+```tsx
+type CardProps = {
+  children: React.ReactNode;
+};
+```
+
+---
+
+# Component
+
+```tsx
+const Card = ({
+  children
+}: CardProps) => {
+  return <div>{children}</div>;
+};
+```
+
+---
+
+# Usage
+
+```tsx
+<Card>
+  <h1>Hello</h1>
+</Card>
+```
+
+---
+
+# useState Hook
+
+`useState` manages component state.
+
+---
+
+# Basic Example
+
+```tsx
+import { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] =
+    useState<number>(0);
+
+  return (
+    <button
+      onClick={() =>
+        setCount(count + 1)
+      }
+    >
+      {count}
+    </button>
+  );
+};
+```
+
+---
+
+# useState with String
+
+```tsx
+const [name, setName] =
+  useState<string>("");
+```
+
+---
+
+# useState with Array
+
+```tsx
+const [users, setUsers] =
+  useState<string[]>([]);
+```
+
+---
+
+# useState with Objects
+
+```tsx
+type User = {
+  name: string;
+  age: number;
+};
+
+const [user, setUser] =
+  useState<User | null>(null);
+```
+
+---
+
+# useEffect Hook
+
+`useEffect` handles side effects.
+
+---
+
+# Example
+
+```tsx
+import { useEffect } from "react";
+
+useEffect(() => {
+  console.log("Component Mounted");
+}, []);
+```
+
+---
+
+# Fetch API Data
+
+```tsx
+import { useEffect, useState } from "react";
+
+type User = {
+  id: number;
+  name: string;
+};
+
+const Users = () => {
+  const [users, setUsers] =
+    useState<User[]>([]);
+
+  useEffect(() => {
+    fetch(
+      "https://jsonplaceholder.typicode.com/users"
+    )
+      .then(res => res.json())
+      .then(data => setUsers(data));
+  }, []);
+
+  return (
+    <div>
+      {users.map(user => (
+        <p key={user.id}>
+          {user.name}
+        </p>
+      ))}
+    </div>
+  );
+};
+```
+
+---
+
+# Event Typing
+
+Events should be typed properly.
+
+---
+
+# Input Change Event
+
+```tsx
+const handleChange = (
+  event: React.ChangeEvent<HTMLInputElement>
+) => {
+  console.log(event.target.value);
+};
+```
+
+---
+
+# Button Click Event
+
+```tsx
+const handleClick = (
+  event: React.MouseEvent<HTMLButtonElement>
+) => {
+  console.log("Clicked");
+};
+```
+
+---
+
+# Forms in React TypeScript
+
+---
+
+# Example
+
+```tsx
+import { useState } from "react";
+
+const LoginForm = () => {
+  const [email, setEmail] =
+    useState<string>("");
+
+  return (
+    <input
+      type="email"
+      value={email}
+      onChange={e =>
+        setEmail(e.target.value)
+      }
+    />
+  );
+};
+```
+
+---
+
+# useRef Hook
+
+`useRef` references DOM elements.
+
+---
+
+# Example
+
+```tsx
+import { useRef } from "react";
+
+const Input = () => {
+  const inputRef =
+    useRef<HTMLInputElement>(null);
+
+  return (
+    <input ref={inputRef} />
+  );
+};
+```
+
+---
+
+# Context API with TypeScript
+
+---
+
+# Create Context Type
+
+```tsx
+type ThemeContextType = {
+  theme: string;
+};
+```
+
+---
+
+# Create Context
+
+```tsx
+import { createContext } from "react";
+
+export const ThemeContext =
+  createContext<
+    ThemeContextType | undefined
+  >(undefined);
+```
+
+---
+
+# React.FC
+
+React provides `React.FC`.
+
+---
+
+# Example
+
+```tsx
+const Header: React.FC = () => {
+  return <h1>Header</h1>;
+};
+```
+
+---
+
+# Interfaces vs Types for Props
+
+| Interface | Type |
+|---|---|
+| Better for extension | Better for unions |
+| Common in large apps | Flexible syntax |
+
+---
+
+# Component Folder Structure
+
+```bash
+components/
+│
+├── Button/
+│   ├── Button.tsx
+│   ├── Button.module.css
+│   └── index.ts
+```
+
+---
+
+# Custom Hooks
+
+---
+
+# Example
+
+```tsx
+import { useState } from "react";
+
+export function useCounter() {
+  const [count, setCount] =
+    useState<number>(0);
+
+  const increment = () =>
+    setCount(count + 1);
+
+  return {
+    count,
+    increment
+  };
+}
+```
+
+---
+
+# Using Custom Hook
+
+```tsx
+const Counter = () => {
+  const { count, increment } =
+    useCounter();
+
+  return (
+    <button onClick={increment}>
+      {count}
+    </button>
+  );
+};
+```
+
+---
+
+# API Service Structure
+
+```bash
+src/
+│
+├── services/
+│   └── api.ts
+```
+
+---
+
+# Example API Service
+
+```ts
+export async function getUsers() {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/users"
+  );
+
+  return response.json();
+}
+```
+
+---
+
+# Environment Variables
+
+## Example
+
+```bash
+VITE_API_URL=https://api.example.com
+```
+
+---
+
+# Access Variable
+
+```ts
+const apiUrl =
+  import.meta.env.VITE_API_URL;
+```
+
+---
+
+# React Router with TypeScript
+
+---
+
+# Install
+
+```bash
+npm install react-router-dom
+```
+
+---
+
+# Example
+
+```tsx
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+```
+
+---
+
+# Lazy Loading
+
+---
+
+# Example
+
+```tsx
+import { lazy } from "react";
+
+const Home = lazy(() =>
+  import("./pages/Home")
+);
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Using any everywhere | Unsafe components |
+| Untyped props | Runtime bugs |
+| Large components | Hard maintenance |
+| Poor folder structure | Scalability issues |
+
+---
+
+# Best Practices
+
+- Type all props
+- Use reusable components
+- Separate business logic
+- Create custom hooks
+- Use proper folder structure
+- Avoid unnecessary any
+
+---
+
+# Professional Architecture Example
+
+```bash
+src/
+│
+├── assets/
+├── components/
+├── hooks/
+├── layouts/
+├── pages/
+├── routes/
+├── services/
+├── store/
+├── types/
+├── utils/
+└── App.tsx
+```
+
+---
+
+# Real-world Example
+
+```tsx
+type ProductProps = {
+  name: string;
+  price: number;
+};
+
+const ProductCard = ({
+  name,
+  price
+}: ProductProps) => {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>${price}</p>
+    </div>
+  );
+};
+
+export default ProductCard;
+```
+
+---
+
+# Usage
+
+```tsx
+<ProductCard
+  name="Laptop"
+  price={1200}
+/>
+```
+
+---
+
+# Advantages of React + TypeScript
+
+- Better scalability
+- Safer components
+- Cleaner architecture
+- Better collaboration
+- Improved maintainability
+
+---
+
+# Conclusion
+
+React with TypeScript is one of the best combinations for modern frontend development.
+
+It helps developers build:
+
+- Scalable applications
+- Enterprise-level systems
+- Reusable components
+- Professional architectures
+- Production-ready frontend applications
+
+# 17. Advanced TypeScript Concepts
+
+Advanced TypeScript concepts help developers build enterprise-level, scalable, and highly type-safe applications.
+
+These concepts are widely used in:
+
+- Large applications
+- Frameworks
+- Enterprise software
+- APIs
+- Libraries
+- Professional frontend/backend systems
+
+---
+
+# What are Advanced Concepts?
+
+Advanced TypeScript concepts include:
+
+- Utility Types
+- Conditional Types
+- Mapped Types
+- Decorators
+- Advanced Generics
+- Type Guards
+- Indexed Access Types
+- Infer Keyword
+- Template Literal Types
+
+---
+
+# Utility Types
+
+TypeScript provides built-in utility types to transform existing types.
+
+---
+
+# Partial Type
+
+`Partial<T>` makes all properties optional.
+
+---
+
+# Example
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+
+type PartialUser =
+  Partial<User>;
+```
+
+---
+
+# Usage
+
+```ts
+const user: PartialUser = {
+  name: "Ali"
+};
+```
+
+---
+
+# Required Type
+
+`Required<T>` makes all properties required.
+
+---
+
+# Example
+
+```ts
+interface Product {
+  name?: string;
+  price?: number;
+}
+
+type RequiredProduct =
+  Required<Product>;
+```
+
+---
+
+# Readonly Type
+
+`Readonly<T>` prevents modification.
+
+---
+
+# Example
+
+```ts
+interface User {
+  name: string;
+}
+
+const user: Readonly<User> = {
+  name: "Ali"
+};
+```
+
+---
+
+# Invalid Modification
+
+```ts
+user.name = "Ahmed";
+```
+
+This produces an error.
+
+---
+
+# Pick Type
+
+`Pick<T, K>` selects specific properties.
+
+---
+
+# Example
+
+```ts
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+type UserPreview =
+  Pick<User, "name" | "email">;
+```
+
+---
+
+# Omit Type
+
+`Omit<T, K>` removes properties.
+
+---
+
+# Example
+
+```ts
+type UserWithoutEmail =
+  Omit<User, "email">;
+```
+
+---
+
+# Record Type
+
+`Record<K, T>` creates object types dynamically.
+
+---
+
+# Example
+
+```ts
+type Scores = Record<
+  string,
+  number
+>;
+```
+
+---
+
+# Usage
+
+```ts
+const marks: Scores = {
+  Ali: 90,
+  Ahmed: 85
+};
+```
+
+---
+
+# Conditional Types
+
+Conditional types use conditions inside types.
+
+---
+
+# Syntax
+
+```ts
+T extends U ? X : Y
+```
+
+---
+
+# Example
+
+```ts
+type IsString<T> =
+  T extends string
+    ? "YES"
+    : "NO";
+```
+
+---
+
+# Usage
+
+```ts
+type Result1 =
+  IsString<string>;
+
+type Result2 =
+  IsString<number>;
+```
+
+---
+
+# Output
+
+```bash
+YES
+NO
+```
+
+---
+
+# Mapped Types
+
+Mapped types transform properties dynamically.
+
+---
+
+# Example
+
+```ts
+type ReadonlyUser<T> = {
+  readonly [K in keyof T]: T[K];
+};
+```
+
+---
+
+# Usage
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+
+type SafeUser =
+  ReadonlyUser<User>;
+```
+
+---
+
+# keyof Operator
+
+`keyof` extracts object keys.
+
+---
+
+# Example
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+
+type UserKeys = keyof User;
+```
+
+---
+
+# Output
+
+```bash
+"name" | "age"
+```
+
+---
+
+# Indexed Access Types
+
+Access property types dynamically.
+
+---
+
+# Example
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+
+type NameType =
+  User["name"];
+```
+
+---
+
+# Output
+
+```bash
+string
+```
+
+---
+
+# Type Guards
+
+Type guards narrow types safely.
+
+---
+
+# typeof Guard
+
+```ts
+function print(
+  value: string | number
+) {
+  if (typeof value === "string") {
+    console.log(
+      value.toUpperCase()
+    );
+  }
+}
+```
+
+---
+
+# instanceof Guard
+
+```ts
+class User {}
+
+const user = new User();
+
+console.log(
+  user instanceof User
+);
+```
+
+---
+
+# Custom Type Guards
+
+---
+
+# Example
+
+```ts
+type Admin = {
+  role: string;
+};
+
+function isAdmin(
+  user: any
+): user is Admin {
+  return user.role !== undefined;
+}
+```
+
+---
+
+# Decorators
+
+Decorators add metadata to classes and methods.
+
+---
+
+# Enable Decorators
+
+## tsconfig.json
+
+```json
+{
+  "experimentalDecorators": true
+}
+```
+
+---
+
+# Class Decorator Example
+
+```ts
+function Logger(
+  constructor: Function
+) {
+  console.log("Logging...");
+}
+
+@Logger
+class User {}
+```
+
+---
+
+# Method Decorator Example
+
+```ts
+function Log(
+  target: any,
+  propertyKey: string
+) {
+  console.log(propertyKey);
+}
+```
+
+---
+
+# Generic Constraints
+
+Constraints limit generic types.
+
+---
+
+# Example
+
+```ts
+function printLength<
+  T extends {
+    length: number;
+  }
+>(item: T) {
+  console.log(item.length);
+}
+```
+
+---
+
+# Usage
+
+```ts
+printLength("Hello");
+printLength([1, 2, 3]);
+```
+
+---
+
+# Infer Keyword
+
+`infer` extracts types dynamically.
+
+---
+
+# Example
+
+```ts
+type ReturnTypeOf<T> =
+  T extends (
+    ...args: any[]
+  ) => infer R
+    ? R
+    : never;
+```
+
+---
+
+# Template Literal Types
+
+Create dynamic string types.
+
+---
+
+# Example
+
+```ts
+type Direction =
+  "left" | "right";
+
+type Move =
+  `move-${Direction}`;
+```
+
+---
+
+# Output
+
+```bash
+"move-left"
+"move-right"
+```
+
+---
+
+# Advanced Generic Example
+
+```ts
+class Repository<T> {
+  private items: T[] = [];
+
+  add(item: T) {
+    this.items.push(item);
+  }
+
+  getAll(): T[] {
+    return this.items;
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+const users =
+  new Repository<string>();
+
+users.add("Ali");
+
+console.log(users.getAll());
+```
+
+---
+
+# Output
+
+```bash
+["Ali"]
+```
+
+---
+
+# Deep Readonly Type
+
+---
+
+# Example
+
+```ts
+type DeepReadonly<T> = {
+  readonly [K in keyof T]:
+    T[K] extends object
+      ? DeepReadonly<T[K]>
+      : T[K];
+};
+```
+
+---
+
+# Function Overloads
+
+Multiple function signatures.
+
+---
+
+# Example
+
+```ts
+function combine(
+  a: string,
+  b: string
+): string;
+
+function combine(
+  a: number,
+  b: number
+): number;
+
+function combine(
+  a: any,
+  b: any
+) {
+  return a + b;
+}
+```
+
+---
+
+# Usage
+
+```ts
+console.log(
+  combine("Hello ", "TS")
+);
+
+console.log(
+  combine(10, 20)
+);
+```
+
+---
+
+# Output
+
+```bash
+Hello TS
+30
+```
+
+---
+
+# Advanced Async Types
+
+---
+
+# Example
+
+```ts
+type ApiResponse<T> = {
+  success: boolean;
+  data: T;
+};
+```
+
+---
+
+# Usage
+
+```ts
+interface User {
+  id: number;
+  name: string;
+}
+
+const response:
+  ApiResponse<User> = {
+    success: true,
+    data: {
+      id: 1,
+      name: "Ali"
+    }
+  };
+```
+
+---
+
+# Namespace Example
+
+```ts
+namespace MathUtils {
+  export function add(
+    a: number,
+    b: number
+  ) {
+    return a + b;
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+console.log(
+  MathUtils.add(5, 5)
+);
+```
+
+---
+
+# Output
+
+```bash
+10
+```
+
+---
+
+# Performance Optimization Tips
+
+- Use lazy loading
+- Avoid unnecessary types
+- Reduce deep nesting
+- Use reusable utilities
+- Prefer modular architecture
+
+---
+
+# Enterprise Architecture Example
+
+```bash
+src/
+│
+├── api/
+├── core/
+├── decorators/
+├── hooks/
+├── interfaces/
+├── middleware/
+├── repositories/
+├── services/
+├── types/
+├── utils/
+└── app.ts
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Overcomplicated types | Hard readability |
+| Using any everywhere | Unsafe architecture |
+| Ignoring utility types | Duplicate code |
+| Deep nesting | Complex maintenance |
+
+---
+
+# Best Practices
+
+- Keep types readable
+- Use utility types wisely
+- Prefer reusable generics
+- Avoid unnecessary complexity
+- Separate advanced types into files
+- Use strict mode
+
+---
+
+# Real-world Example
+
+```ts
+interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+}
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
+
+async function getProducts():
+Promise<
+  ApiResponse<Product[]>
+> {
+  return {
+    success: true,
+    data: [
+      {
+        id: 1,
+        name: "Laptop",
+        price: 1200
+      }
+    ]
+  };
+}
+
+getProducts().then(
+  response => {
+    console.log(response);
+  }
+);
+```
+
+---
+
+# Output
+
+```bash
+{
+  success: true,
+  data: [
+    {
+      id: 1,
+      name: 'Laptop',
+      price: 1200
+    }
+  ]
+}
+```
+
+---
+
+# Advantages of Advanced TypeScript
+
+- Stronger type safety
+- Better scalability
+- Cleaner architecture
+- Enterprise-level development
+- Highly reusable code
+
+---
+
+# Conclusion
+
+Advanced TypeScript concepts help developers build:
+
+- Enterprise applications
+- Large-scale systems
+- Professional architectures
+- Highly reusable codebases
+- Production-ready software
+
+# 18. TypeScript Backend Development with Node.js & Express
+
+TypeScript is widely used for backend development to build scalable, secure, and enterprise-level server applications.
+
+This section covers:
+
+- Node.js with TypeScript
+- Express.js setup
+- REST APIs
+- Middleware
+- Authentication
+- Database integration
+- Professional backend architecture
+
+---
+
+# Why Use TypeScript for Backend?
+
+TypeScript improves backend development by providing:
+
+- Strong typing
+- Better scalability
+- Safer APIs
+- Cleaner architecture
+- Better developer experience
+
+---
+
+# What is Node.js?
+
+Node.js is a JavaScript runtime used for backend development.
+
+It allows developers to build:
+
+- APIs
+- Realtime applications
+- Authentication systems
+- Microservices
+- Full-stack applications
+
+---
+
+# What is Express.js?
+
+Express.js is a lightweight backend framework for Node.js.
+
+It simplifies:
+
+- Routing
+- Middleware
+- API creation
+- Request handling
+
+---
+
+# Create Backend Project
+
+---
+
+# Step 1 — Create Folder
+
+```bash
+mkdir ts-backend
+```
+
+---
+
+# Step 2 — Move Into Folder
+
+```bash
+cd ts-backend
+```
+
+---
+
+# Step 3 — Initialize Project
+
+```bash
+npm init -y
+```
+
+---
+
+# Step 4 — Install Dependencies
+
+```bash
+npm install express
+```
+
+---
+
+# Install TypeScript Dependencies
+
+```bash
+npm install --save-dev typescript ts-node nodemon @types/node @types/express
+```
+
+---
+
+# Step 5 — Initialize TypeScript
+
+```bash
+npx tsc --init
+```
+
+---
+
+# Recommended Project Structure
+
+```bash
+src/
+│
+├── controllers/
+├── middleware/
+├── models/
+├── routes/
+├── services/
+├── interfaces/
+├── utils/
+├── config/
+└── server.ts
+```
+
+---
+
+# Configure tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true
+  }
+}
+```
+
+---
+
+# Create Express Server
+
+## src/server.ts
+
+```ts
+import express from "express";
+
+const app = express();
+
+const PORT = 5000;
+
+app.listen(PORT, () => {
+  console.log(
+    `Server running on port ${PORT}`
+  );
+});
+```
+
+---
+
+# Run Development Server
+
+```bash
+npx ts-node src/server.ts
+```
+
+---
+
+# Output
+
+```bash
+Server running on port 5000
+```
+
+---
+
+# Create First Route
+
+```ts
+app.get("/", (req, res) => {
+  res.send("Hello TypeScript Backend");
+});
+```
+
+---
+
+# Output
+
+```bash
+Hello TypeScript Backend
+```
+
+---
+
+# Express Middleware
+
+Middleware processes requests before responses are sent.
+
+---
+
+# Example Middleware
+
+```ts
+app.use((req, res, next) => {
+  console.log("Request Received");
+
+  next();
+});
+```
+
+---
+
+# JSON Middleware
+
+```ts
+app.use(express.json());
+```
+
+---
+
+# Route Parameters
+
+---
+
+# Example
+
+```ts
+app.get(
+  "/user/:id",
+  (req, res) => {
+    res.send(req.params.id);
+  }
+);
+```
+
+---
+
+# URL Example
+
+```bash
+/user/10
+```
+
+---
+
+# Output
+
+```bash
+10
+```
+
+---
+
+# Query Parameters
+
+---
+
+# Example
+
+```ts
+app.get("/search", (req, res) => {
+  res.send(req.query.name);
+});
+```
+
+---
+
+# URL Example
+
+```bash
+/search?name=Ali
+```
+
+---
+
+# Output
+
+```bash
+Ali
+```
+
+---
+
+# Request Body
+
+---
+
+# Example
+
+```ts
+app.post("/user", (req, res) => {
+  console.log(req.body);
+
+  res.send("User Created");
+});
+```
+
+---
+
+# Example JSON Body
+
+```json
+{
+  "name": "Ali",
+  "age": 22
+}
+```
+
+---
+
+# Type Request Body
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+```
+
+---
+
+# Usage
+
+```ts
+app.post(
+  "/user",
+  (
+    req: Request<
+      {},
+      {},
+      User
+    >,
+    res: Response
+  ) => {
+    res.send(req.body);
+  }
+);
+```
+
+---
+
+# Create Router
+
+## routes/userRoutes.ts
+
+```ts
+import express from "express";
+
+const router = express.Router();
+
+router.get("/", (req, res) => {
+  res.send("Users Route");
+});
+
+export default router;
+```
+
+---
+
+# Use Router
+
+## server.ts
+
+```ts
+import userRoutes
+from "./routes/userRoutes";
+
+app.use("/users", userRoutes);
+```
+
+---
+
+# Controller Architecture
+
+Controllers separate request logic.
+
+---
+
+# Example
+
+## controllers/userController.ts
+
+```ts
+export const getUsers = (
+  req: Request,
+  res: Response
+) => {
+  res.send("All Users");
+};
+```
+
+---
+
+# Service Layer
+
+Services contain business logic.
+
+---
+
+# Example
+
+## services/userService.ts
+
+```ts
+export function fetchUsers() {
+  return [
+    {
+      id: 1,
+      name: "Ali"
+    }
+  ];
+}
+```
+
+---
+
+# Environment Variables
+
+Install dotenv:
+
+```bash
+npm install dotenv
+```
+
+---
+
+# Create .env File
+
+```bash
+PORT=5000
+DB_URL=mongodb://localhost
+```
+
+---
+
+# Load Environment Variables
+
+```ts
+import dotenv from "dotenv";
+
+dotenv.config();
+```
+
+---
+
+# Access Variables
+
+```ts
+const PORT =
+  process.env.PORT;
+```
+
+---
+
+# Error Handling Middleware
+
+---
+
+# Example
+
+```ts
+app.use(
+  (
+    err: Error,
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    res.status(500).json({
+      message: err.message
+    });
+  }
+);
+```
+
+---
+
+# Async Route Example
+
+```ts
+app.get(
+  "/products",
+  async (req, res) => {
+    const products = await Promise.resolve([
+      {
+        id: 1,
+        name: "Laptop"
+      }
+    ]);
+
+    res.json(products);
+  }
+);
+```
+
+---
+
+# HTTP Status Codes
+
+| Code | Meaning |
+|---|---|
+| 200 | Success |
+| 201 | Created |
+| 400 | Bad Request |
+| 401 | Unauthorized |
+| 404 | Not Found |
+| 500 | Server Error |
+
+---
+
+# Send JSON Response
+
+```ts
+res.status(200).json({
+  success: true
+});
+```
+
+---
+
+# Authentication Example
+
+---
+
+# Install JWT
+
+```bash
+npm install jsonwebtoken bcryptjs
+```
+
+---
+
+# Example Login
+
+```ts
+import jwt from "jsonwebtoken";
+
+const token = jwt.sign(
+  {
+    id: 1
+  },
+  "SECRET_KEY"
+);
+```
+
+---
+
+# Verify Token Middleware
+
+```ts
+function authMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  next();
+}
+```
+
+---
+
+# Database Integration
+
+---
+
+# Install MongoDB Packages
+
+```bash
+npm install mongoose
+```
+
+---
+
+# Create Database Connection
+
+## config/database.ts
+
+```ts
+import mongoose from "mongoose";
+
+export async function connectDB() {
+  await mongoose.connect(
+    process.env.DB_URL as string
+  );
+
+  console.log("Database Connected");
+}
+```
+
+---
+
+# Create Model
+
+## models/User.ts
+
+```ts
+import mongoose from "mongoose";
+
+const userSchema =
+  new mongoose.Schema({
+    name: String,
+    age: Number
+  });
+
+export default mongoose.model(
+  "User",
+  userSchema
+);
+```
+
+---
+
+# Create User
+
+```ts
+const user = await User.create({
+  name: "Ali",
+  age: 22
+});
+```
+
+---
+
+# Validation Example
+
+```ts
+if (!email) {
+  return res.status(400).json({
+    message: "Email Required"
+  });
+}
+```
+
+---
+
+# Async Error Wrapper
+
+```ts
+function asyncHandler(
+  fn: Function
+) {
+  return (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    Promise.resolve(
+      fn(req, res, next)
+    ).catch(next);
+  };
+}
+```
+
+---
+
+# API Response Structure
+
+```json
+{
+  "success": true,
+  "message": "User Created",
+  "data": {}
+}
+```
+
+---
+
+# Professional Architecture
+
+```bash
+src/
+│
+├── config/
+├── controllers/
+├── database/
+├── interfaces/
+├── middleware/
+├── models/
+├── routes/
+├── services/
+├── utils/
+└── server.ts
+```
+
+---
+
+# Logging Requests
+
+Install Morgan:
+
+```bash
+npm install morgan
+```
+
+---
+
+# Usage
+
+```ts
+import morgan from "morgan";
+
+app.use(morgan("dev"));
+```
+
+---
+
+# Security Best Practices
+
+Install Helmet:
+
+```bash
+npm install helmet
+```
+
+---
+
+# Usage
+
+```ts
+import helmet from "helmet";
+
+app.use(helmet());
+```
+
+---
+
+# CORS Setup
+
+Install CORS:
+
+```bash
+npm install cors
+```
+
+---
+
+# Usage
+
+```ts
+import cors from "cors";
+
+app.use(cors());
+```
+
+---
+
+# Production Scripts
+
+## package.json
+
+```json
+{
+  "scripts": {
+    "dev": "nodemon src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  }
+}
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Large server.ts file | Poor scalability |
+| No error handling | Application crashes |
+| Using any | Unsafe APIs |
+| Hardcoded secrets | Security risks |
+
+---
+
+# Best Practices
+
+- Use layered architecture
+- Separate controllers/services
+- Validate user input
+- Use environment variables
+- Handle errors properly
+- Use TypeScript interfaces
+
+---
+
+# Real-world API Example
+
+```ts
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
+
+const products: Product[] = [
+  {
+    id: 1,
+    name: "Laptop",
+    price: 1200
+  }
+];
+
+app.get(
+  "/products",
+  (req, res) => {
+    res.json(products);
+  }
+);
+```
+
+---
+
+# Output
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Laptop",
+    "price": 1200
+  }
+]
+```
+
+---
+
+# Advantages of TypeScript Backend Development
+
+- Better scalability
+- Cleaner APIs
+- Strong type safety
+- Professional architecture
+- Easier maintenance
+
+---
+
+# Conclusion
+
+TypeScript with Node.js and Express is one of the best choices for modern backend development.
+
+It helps developers build:
+
+- Secure APIs
+- Enterprise systems
+- Scalable architectures
+- Production-ready applications
+- Professional backend solutions
+
+# 19. Database Integration in TypeScript
+
+Databases are used to store, manage, and retrieve application data.
+
+TypeScript applications commonly integrate databases for:
+
+- Authentication systems
+- E-commerce applications
+- Social media platforms
+- APIs
+- Enterprise software
+
+---
+
+# Types of Databases
+
+There are two main database categories.
+
+| Type | Example |
+|---|---|
+| SQL Database | MySQL, PostgreSQL |
+| NoSQL Database | MongoDB |
+
+---
+
+# SQL vs NoSQL
+
+| SQL | NoSQL |
+|---|---|
+| Table-based | Document-based |
+| Structured schema | Flexible schema |
+| Relational | Non-relational |
+| Example: PostgreSQL | Example: MongoDB |
+
+---
+
+# Why Use TypeScript with Databases?
+
+TypeScript provides:
+
+- Type safety
+- Better data validation
+- Safer queries
+- Better scalability
+- Cleaner architecture
+
+---
+
+# Popular Database Libraries
+
+| Database | Library |
+|---|---|
+| MongoDB | Mongoose |
+| PostgreSQL | Prisma |
+| MySQL | Sequelize |
+| SQLite | Prisma |
+
+---
+
+# MongoDB with Mongoose
+
+MongoDB is one of the most popular NoSQL databases.
+
+---
+
+# Install Mongoose
+
+```bash
+npm install mongoose
+```
+
+---
+
+# Install Type Definitions
+
+```bash
+npm install --save-dev @types/mongoose
+```
+
+---
+
+# Create Database Connection
+
+## config/database.ts
+
+```ts
+import mongoose from "mongoose";
+
+export async function connectDB() {
+  try {
+    await mongoose.connect(
+      process.env.DB_URL as string
+    );
+
+    console.log(
+      "Database Connected"
+    );
+  } catch (error) {
+    console.error(error);
+  }
+}
+```
+
+---
+
+# Environment Variables
+
+## .env
+
+```bash
+DB_URL=mongodb://127.0.0.1:27017/mydb
+```
+
+---
+
+# Load Environment Variables
+
+```ts
+import dotenv from "dotenv";
+
+dotenv.config();
+```
+
+---
+
+# Create User Schema
+
+## models/User.ts
+
+```ts
+import mongoose from "mongoose";
+
+const userSchema =
+  new mongoose.Schema({
+    name: {
+      type: String,
+      required: true
+    },
+
+    email: {
+      type: String,
+      required: true
+    },
+
+    age: Number
+  });
+```
+
+---
+
+# Export Model
+
+```ts
+export default mongoose.model(
+  "User",
+  userSchema
+);
+```
+
+---
+
+# Create User Interface
+
+```ts
+export interface IUser {
+  name: string;
+  email: string;
+  age?: number;
+}
+```
+
+---
+
+# Create User
+
+```ts
+const user = await User.create({
+  name: "Ali",
+  email: "ali@gmail.com",
+  age: 22
+});
+```
+
+---
+
+# Get All Users
+
+```ts
+const users = await User.find();
+```
+
+---
+
+# Find Single User
+
+```ts
+const user = await User.findById(id);
+```
+
+---
+
+# Update User
+
+```ts
+await User.findByIdAndUpdate(
+  id,
+  {
+    name: "Ahmed"
+  }
+);
+```
+
+---
+
+# Delete User
+
+```ts
+await User.findByIdAndDelete(id);
+```
+
+---
+
+# Express Controller Example
+
+## controllers/userController.ts
+
+```ts
+import User from "../models/User";
+
+export async function getUsers(
+  req,
+  res
+) {
+  const users = await User.find();
+
+  res.json(users);
+}
+```
+
+---
+
+# Add Route
+
+## routes/userRoutes.ts
+
+```ts
+router.get(
+  "/users",
+  getUsers
+);
+```
+
+---
+
+# Validation Example
+
+```ts
+if (!email) {
+  return res.status(400).json({
+    message: "Email Required"
+  });
+}
+```
+
+---
+
+# Mongoose Schema Validation
+
+```ts
+email: {
+  type: String,
+  required: true,
+  unique: true
+}
+```
+
+---
+
+# Timestamps
+
+Automatically create:
+
+- createdAt
+- updatedAt
+
+---
+
+# Example
+
+```ts
+const userSchema =
+  new mongoose.Schema(
+    {
+      name: String
+    },
+    {
+      timestamps: true
+    }
+  );
+```
+
+---
+
+# Password Hashing
+
+Install bcrypt:
+
+```bash
+npm install bcryptjs
+```
+
+---
+
+# Hash Password
+
+```ts
+import bcrypt from "bcryptjs";
+
+const hashedPassword =
+  await bcrypt.hash(
+    password,
+    10
+  );
+```
+
+---
+
+# Compare Password
+
+```ts
+const isMatch =
+  await bcrypt.compare(
+    password,
+    user.password
+  );
+```
+
+---
+
+# JWT Authentication
+
+Install JWT:
+
+```bash
+npm install jsonwebtoken
+```
+
+---
+
+# Create Token
+
+```ts
+import jwt from "jsonwebtoken";
+
+const token = jwt.sign(
+  {
+    id: user._id
+  },
+  "SECRET_KEY",
+  {
+    expiresIn: "7d"
+  }
+);
+```
+
+---
+
+# Verify Token
+
+```ts
+jwt.verify(
+  token,
+  "SECRET_KEY"
+);
+```
+
+---
+
+# Authentication Middleware
+
+```ts
+function authMiddleware(
+  req,
+  res,
+  next
+) {
+  next();
+}
+```
+
+---
+
+# Pagination Example
+
+```ts
+const page = 1;
+const limit = 10;
+
+const users = await User.find()
+  .skip((page - 1) * limit)
+  .limit(limit);
+```
+
+---
+
+# Search Example
+
+```ts
+const users = await User.find({
+  name: /ali/i
+});
+```
+
+---
+
+# Sorting Example
+
+```ts
+const users = await User.find()
+  .sort({
+    createdAt: -1
+  });
+```
+
+---
+
+# Populate Relationships
+
+---
+
+# Example
+
+```ts
+const posts = await Post.find()
+  .populate("user");
+```
+
+---
+
+# Transactions
+
+Transactions ensure database consistency.
+
+---
+
+# Example
+
+```ts
+const session =
+  await mongoose.startSession();
+
+session.startTransaction();
+```
+
+---
+
+# Error Handling Example
+
+```ts
+try {
+  const users =
+    await User.find();
+
+  res.json(users);
+} catch (error) {
+  res.status(500).json({
+    message: "Server Error"
+  });
+}
+```
+
+---
+
+# Professional Backend Structure
+
+```bash
+src/
+│
+├── config/
+├── controllers/
+├── database/
+├── middleware/
+├── models/
+├── routes/
+├── services/
+├── validators/
+└── server.ts
+```
+
+---
+
+# Prisma ORM
+
+Prisma is a modern TypeScript ORM.
+
+---
+
+# Install Prisma
+
+```bash
+npm install prisma
+```
+
+---
+
+# Initialize Prisma
+
+```bash
+npx prisma init
+```
+
+---
+
+# Prisma Schema Example
+
+## prisma/schema.prisma
+
+```prisma
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String @unique
+}
+```
+
+---
+
+# Generate Prisma Client
+
+```bash
+npx prisma generate
+```
+
+---
+
+# Create User with Prisma
+
+```ts
+const user =
+  await prisma.user.create({
+    data: {
+      name: "Ali",
+      email: "ali@gmail.com"
+    }
+  });
+```
+
+---
+
+# PostgreSQL Connection
+
+## .env
+
+```bash
+DATABASE_URL="postgresql://user:password@localhost:5432/mydb"
+```
+
+---
+
+# Database Seeding
+
+Seed initial data.
+
+---
+
+# Example
+
+```ts
+await User.create({
+  name: "Admin",
+  email: "admin@gmail.com"
+});
+```
+
+---
+
+# Repository Pattern
+
+Repository pattern separates database logic.
+
+---
+
+# Example
+
+## repositories/userRepository.ts
+
+```ts
+export class UserRepository {
+  async findAll() {
+    return User.find();
+  }
+}
+```
+
+---
+
+# Service Layer Example
+
+## services/userService.ts
+
+```ts
+export class UserService {
+  async getUsers() {
+    return User.find();
+  }
+}
+```
+
+---
+
+# Performance Optimization
+
+- Use indexes
+- Avoid unnecessary queries
+- Use pagination
+- Cache data
+- Optimize relationships
+
+---
+
+# Database Index Example
+
+```ts
+userSchema.index({
+  email: 1
+});
+```
+
+---
+
+# Security Best Practices
+
+- Validate user input
+- Hash passwords
+- Use environment variables
+- Prevent SQL injection
+- Limit sensitive data exposure
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| No validation | Invalid data |
+| Hardcoded credentials | Security risk |
+| No indexing | Slow queries |
+| Large controllers | Poor scalability |
+
+---
+
+# Best Practices
+
+- Separate models/services/controllers
+- Use interfaces
+- Handle errors properly
+- Validate input
+- Use repository pattern
+- Optimize queries
+
+---
+
+# Real-world Example
+
+```ts
+interface Product {
+  name: string;
+  price: number;
+}
+
+const productSchema =
+  new mongoose.Schema<Product>({
+    name: String,
+    price: Number
+  });
+
+const Product =
+  mongoose.model(
+    "Product",
+    productSchema
+  );
+
+async function createProduct() {
+  const product =
+    await Product.create({
+      name: "Laptop",
+      price: 1200
+    });
+
+  console.log(product);
+}
+```
+
+---
+
+# Output
+
+```bash
+{
+  name: 'Laptop',
+  price: 1200
+}
+```
+
+---
+
+# Advantages of Database Integration
+
+- Persistent data storage
+- Scalable applications
+- Better data management
+- Professional backend systems
+- Enterprise-level architecture
+
+---
+
+# Conclusion
+
+Database integration is one of the most important parts of backend development.
+
+TypeScript helps developers build:
+
+- Type-safe databases
+- Scalable APIs
+- Secure applications
+- Enterprise systems
+- Production-ready backend architectures
+
+# 20. Deployment & Production in TypeScript
+
+Deployment is the process of publishing an application to a live production environment so users can access it online.
+
+Production-level TypeScript applications require:
+
+- Optimization
+- Security
+- Scalability
+- Monitoring
+- Environment management
+- CI/CD pipelines
+
+---
+
+# What is Production?
+
+Production is the live environment where real users use the application.
+
+---
+
+# Development vs Production
+
+| Development | Production |
+|---|---|
+| Local environment | Live server |
+| Debugging enabled | Optimized |
+| Frequent changes | Stable release |
+| Testing stage | Real users |
+
+---
+
+# Why Deployment Matters
+
+Deployment allows developers to:
+
+- Publish applications online
+- Share APIs globally
+- Scale systems
+- Deliver products to users
+
+---
+
+# Popular Deployment Platforms
+
+| Platform | Usage |
+|---|---|
+| Vercel | Frontend deployment |
+| Netlify | Static websites |
+| Render | Full-stack apps |
+| Railway | Backend deployment |
+| AWS | Enterprise hosting |
+| DigitalOcean | VPS hosting |
+
+---
+
+# Build TypeScript Project
+
+Before deployment, TypeScript must compile into JavaScript.
+
+---
+
+# Build Command
+
+```bash
+npm run build
+```
+
+---
+
+# TypeScript Compilation
+
+```bash
+tsc
+```
+
+---
+
+# Output Folder
+
+Compiled files are usually stored inside:
+
+```bash
+dist/
+```
+
+---
+
+# Example Project Structure
+
+```bash
+project/
+│
+├── src/
+├── dist/
+├── node_modules/
+├── package.json
+├── tsconfig.json
+└── .env
+```
+
+---
+
+# Configure tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": true
+  }
+}
+```
+
+---
+
+# Package.json Scripts
+
+---
+
+# Example
+
+```json
+{
+  "scripts": {
+    "dev": "nodemon src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  }
+}
+```
+
+---
+
+# Install Production Tools
+
+---
+
+# Install Nodemon
+
+```bash
+npm install --save-dev nodemon
+```
+
+---
+
+# Install ts-node
+
+```bash
+npm install --save-dev ts-node
+```
+
+---
+
+# Environment Variables
+
+Sensitive data should never be hardcoded.
+
+---
+
+# Create .env File
+
+```bash
+PORT=5000
+DB_URL=mongodb://localhost
+JWT_SECRET=mysecret
+```
+
+---
+
+# Install dotenv
+
+```bash
+npm install dotenv
+```
+
+---
+
+# Load Environment Variables
+
+```ts
+import dotenv from "dotenv";
+
+dotenv.config();
+```
+
+---
+
+# Access Variables
+
+```ts
+const PORT =
+  process.env.PORT;
+```
+
+---
+
+# Production Environment Example
+
+```bash
+NODE_ENV=production
+```
+
+---
+
+# Security Best Practices
+
+Production applications require strong security.
+
+---
+
+# Install Helmet
+
+```bash
+npm install helmet
+```
+
+---
+
+# Usage
+
+```ts
+import helmet from "helmet";
+
+app.use(helmet());
+```
+
+---
+
+# Install CORS
+
+```bash
+npm install cors
+```
+
+---
+
+# Usage
+
+```ts
+import cors from "cors";
+
+app.use(cors());
+```
+
+---
+
+# Request Logging
+
+Install Morgan:
+
+```bash
+npm install morgan
+```
+
+---
+
+# Usage
+
+```ts
+import morgan from "morgan";
+
+app.use(morgan("dev"));
+```
+
+---
+
+# Error Handling Middleware
+
+---
+
+# Example
+
+```ts
+app.use(
+  (
+    err,
+    req,
+    res,
+    next
+  ) => {
+    res.status(500).json({
+      message: err.message
+    });
+  }
+);
+```
+
+---
+
+# Build Optimization
+
+Production builds should be optimized.
+
+---
+
+# Remove Console Logs
+
+Bad practice:
+
+```ts
+console.log(data);
+```
+
+---
+
+# Better Practice
+
+Use proper logging systems.
+
+---
+
+# Minification
+
+Minification reduces file size.
+
+---
+
+# Benefits
+
+- Faster loading
+- Better performance
+- Smaller bundles
+
+---
+
+# Source Maps
+
+Enable source maps for debugging.
+
+---
+
+# tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "sourceMap": true
+  }
+}
+```
+
+---
+
+# Docker Deployment
+
+Docker packages applications into containers.
+
+---
+
+# Why Use Docker?
+
+Docker provides:
+
+- Consistent environments
+- Easier deployment
+- Better scalability
+
+---
+
+# Create Dockerfile
+
+## Dockerfile
+
+```dockerfile
+FROM node:18
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+CMD ["npm", "start"]
+```
+
+---
+
+# Build Docker Image
+
+```bash
+docker build -t ts-app .
+```
+
+---
+
+# Run Docker Container
+
+```bash
+docker run -p 5000:5000 ts-app
+```
+
+---
+
+# Deploy to Vercel
+
+Best for frontend applications.
+
+---
+
+# Install Vercel CLI
+
+```bash
+npm install -g vercel
+```
+
+---
+
+# Deploy
+
+```bash
+vercel
+```
+
+---
+
+# Deploy Backend to Render
+
+---
+
+# Steps
+
+1. Push code to GitHub
+2. Connect repository to Render
+3. Add environment variables
+4. Deploy application
+
+---
+
+# Deploy to Railway
+
+---
+
+# Steps
+
+1. Push project to GitHub
+2. Connect Railway account
+3. Configure environment variables
+4. Deploy
+
+---
+
+# Deploy to AWS
+
+AWS is used for enterprise hosting.
+
+---
+
+# AWS Services
+
+| Service | Purpose |
+|---|---|
+| EC2 | Virtual server |
+| S3 | File storage |
+| RDS | Database |
+| Lambda | Serverless functions |
+
+---
+
+# CI/CD Pipeline
+
+CI/CD automates testing and deployment.
+
+---
+
+# CI/CD Benefits
+
+- Faster deployment
+- Automatic testing
+- Reduced errors
+- Better collaboration
+
+---
+
+# GitHub Actions Example
+
+## .github/workflows/deploy.yml
+
+```yaml
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+```
+
+---
+
+# PM2 Process Manager
+
+PM2 keeps Node.js applications running.
+
+---
+
+# Install PM2
+
+```bash
+npm install -g pm2
+```
+
+---
+
+# Start Application
+
+```bash
+pm2 start dist/server.js
+```
+
+---
+
+# Monitor Processes
+
+```bash
+pm2 monit
+```
+
+---
+
+# Restart App
+
+```bash
+pm2 restart all
+```
+
+---
+
+# Database Deployment
+
+Production databases should be hosted securely.
+
+---
+
+# Popular Database Hosting
+
+| Database | Hosting |
+|---|---|
+| MongoDB | MongoDB Atlas |
+| PostgreSQL | Supabase |
+| MySQL | PlanetScale |
+
+---
+
+# MongoDB Atlas Connection
+
+```bash
+mongodb+srv://username:password@cluster.mongodb.net/mydb
+```
+
+---
+
+# SSL & HTTPS
+
+Production apps should always use HTTPS.
+
+---
+
+# Benefits
+
+- Secure communication
+- Better SEO
+- User trust
+
+---
+
+# Performance Optimization
+
+---
+
+# Use Compression
+
+```bash
+npm install compression
+```
+
+---
+
+# Usage
+
+```ts
+import compression from "compression";
+
+app.use(compression());
+```
+
+---
+
+# Caching
+
+Caching improves performance.
+
+---
+
+# Example
+
+```ts
+res.set(
+  "Cache-Control",
+  "public, max-age=3600"
+);
+```
+
+---
+
+# Monitoring Tools
+
+| Tool | Purpose |
+|---|---|
+| PM2 | Process monitoring |
+| Sentry | Error tracking |
+| New Relic | Performance monitoring |
+
+---
+
+# Sentry Integration
+
+Install Sentry:
+
+```bash
+npm install @sentry/node
+```
+
+---
+
+# Example
+
+```ts
+import * as Sentry from "@sentry/node";
+
+Sentry.init({
+  dsn: "YOUR_DSN"
+});
+```
+
+---
+
+# Backup Strategy
+
+Always backup production databases.
+
+---
+
+# Backup Benefits
+
+- Data recovery
+- Disaster protection
+- Business continuity
+
+---
+
+# API Rate Limiting
+
+Protect APIs from abuse.
+
+---
+
+# Install Express Rate Limit
+
+```bash
+npm install express-rate-limit
+```
+
+---
+
+# Example
+
+```ts
+import rateLimit from "express-rate-limit";
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+});
+
+app.use(limiter);
+```
+
+---
+
+# Professional Deployment Architecture
+
+```bash
+Production Stack
+│
+├── Frontend
+├── Backend API
+├── Database
+├── CDN
+├── Monitoring
+├── Reverse Proxy
+└── SSL
+```
+
+---
+
+# Reverse Proxy with Nginx
+
+Nginx improves:
+
+- Performance
+- Security
+- Load balancing
+
+---
+
+# Example Nginx Config
+
+```nginx
+server {
+  listen 80;
+
+  location / {
+    proxy_pass http://localhost:5000;
+  }
+}
+```
+
+---
+
+# Scaling Applications
+
+Scaling methods:
+
+| Type | Description |
+|---|---|
+| Vertical Scaling | Increase server power |
+| Horizontal Scaling | Add more servers |
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Hardcoded secrets | Security risk |
+| No environment variables | Unsafe deployment |
+| No error handling | Crashes |
+| No backups | Data loss |
+
+---
+
+# Best Practices
+
+- Use environment variables
+- Enable HTTPS
+- Use logging systems
+- Monitor production apps
+- Optimize builds
+- Use CI/CD pipelines
+
+---
+
+# Real-world Deployment Example
+
+```bash
+Frontend:
+Vercel
+
+Backend:
+Render
+
+Database:
+MongoDB Atlas
+
+Monitoring:
+PM2 + Sentry
+```
+
+---
+
+# Advantages of Proper Deployment
+
+- Better scalability
+- Higher performance
+- Improved security
+- Reliable production systems
+- Professional architecture
+
+---
+
+# Conclusion
+
+Deployment and production management are critical parts of professional TypeScript development.
+
+They help developers build:
+
+- Scalable systems
+- Secure applications
+- Production-ready APIs
+- Enterprise architectures
+- Reliable software solutions
 
 
