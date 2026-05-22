@@ -2624,7 +2624,3283 @@ Understanding functions helps developers create:
 - Professional architecture
 - Clean and maintainable systems
 
+# 6. Arrays & Tuples in TypeScript
 
+Arrays and tuples are used to store multiple values in a single variable.
+
+TypeScript provides strong typing support for arrays and tuples which improves:
+
+- Data safety
+- Readability
+- Scalability
+- Error prevention
+
+---
+
+# What is an Array?
+
+An array stores multiple values of the same type.
+
+---
+
+# Array Syntax
+
+```ts
+let arrayName: type[] = [];
+```
+
+---
+
+# String Array
+
+```ts
+let users: string[] = ["Ali", "Ahmed", "Usman"];
+```
+
+---
+
+# Number Array
+
+```ts
+let numbers: number[] = [10, 20, 30];
+```
+
+---
+
+# Boolean Array
+
+```ts
+let status: boolean[] = [true, false, true];
+```
+
+---
+
+# Array Type Inference
+
+TypeScript can automatically detect array types.
+
+---
+
+## Example
+
+```ts
+let fruits = ["Apple", "Banana", "Orange"];
+```
+
+TypeScript automatically understands this is a string array.
+
+---
+
+# Generic Array Syntax
+
+Arrays can also be written using generic syntax.
+
+---
+
+## Example
+
+```ts
+let skills: Array<string> = ["HTML", "CSS", "TypeScript"];
+```
+
+---
+
+# Accessing Array Elements
+
+Array indexing starts from `0`.
+
+---
+
+## Example
+
+```ts
+let colors: string[] = ["Red", "Blue", "Green"];
+
+console.log(colors[0]);
+console.log(colors[1]);
+```
+
+---
+
+# Output
+
+```bash
+Red
+Blue
+```
+
+---
+
+# Modifying Array Elements
+
+```ts
+let users: string[] = ["Ali", "Ahmed"];
+
+users[1] = "Usman";
+
+console.log(users);
+```
+
+---
+
+# Output
+
+```bash
+["Ali", "Usman"]
+```
+
+---
+
+# Adding Elements to Array
+
+## push()
+
+```ts
+let fruits: string[] = ["Apple"];
+
+fruits.push("Banana");
+
+console.log(fruits);
+```
+
+---
+
+# Output
+
+```bash
+["Apple", "Banana"]
+```
+
+---
+
+# Removing Last Element
+
+## pop()
+
+```ts
+let numbers: number[] = [1, 2, 3];
+
+numbers.pop();
+
+console.log(numbers);
+```
+
+---
+
+# Output
+
+```bash
+[1, 2]
+```
+
+---
+
+# Add Element at Beginning
+
+## unshift()
+
+```ts
+let users: string[] = ["Ahmed"];
+
+users.unshift("Ali");
+
+console.log(users);
+```
+
+---
+
+# Output
+
+```bash
+["Ali", "Ahmed"]
+```
+
+---
+
+# Remove First Element
+
+## shift()
+
+```ts
+let users: string[] = ["Ali", "Ahmed"];
+
+users.shift();
+
+console.log(users);
+```
+
+---
+
+# Output
+
+```bash
+["Ahmed"]
+```
+
+---
+
+# Array Length
+
+```ts
+let fruits: string[] = ["Apple", "Banana", "Orange"];
+
+console.log(fruits.length);
+```
+
+---
+
+# Output
+
+```bash
+3
+```
+
+---
+
+# Loop Through Arrays
+
+## for Loop
+
+```ts
+let numbers: number[] = [10, 20, 30];
+
+for (let i = 0; i < numbers.length; i++) {
+  console.log(numbers[i]);
+}
+```
+
+---
+
+# Output
+
+```bash
+10
+20
+30
+```
+
+---
+
+# for...of Loop
+
+```ts
+let skills: string[] = ["HTML", "CSS", "TS"];
+
+for (let skill of skills) {
+  console.log(skill);
+}
+```
+
+---
+
+# Output
+
+```bash
+HTML
+CSS
+TS
+```
+
+---
+
+# Array Methods
+
+---
+
+# map()
+
+`map()` creates a new array.
+
+---
+
+## Example
+
+```ts
+let numbers: number[] = [1, 2, 3];
+
+let doubled = numbers.map(num => num * 2);
+
+console.log(doubled);
+```
+
+---
+
+# Output
+
+```bash
+[2, 4, 6]
+```
+
+---
+
+# filter()
+
+`filter()` returns matching elements.
+
+---
+
+## Example
+
+```ts
+let ages: number[] = [10, 18, 25, 15];
+
+let adults = ages.filter(age => age >= 18);
+
+console.log(adults);
+```
+
+---
+
+# Output
+
+```bash
+[18, 25]
+```
+
+---
+
+# find()
+
+`find()` returns the first matching value.
+
+---
+
+## Example
+
+```ts
+let users: string[] = ["Ali", "Ahmed", "Usman"];
+
+let result = users.find(user => user === "Ahmed");
+
+console.log(result);
+```
+
+---
+
+# Output
+
+```bash
+Ahmed
+```
+
+---
+
+# includes()
+
+Checks whether a value exists.
+
+---
+
+## Example
+
+```ts
+let skills: string[] = ["HTML", "CSS"];
+
+console.log(skills.includes("CSS"));
+```
+
+---
+
+# Output
+
+```bash
+true
+```
+
+---
+
+# Multi-dimensional Arrays
+
+Arrays can contain other arrays.
+
+---
+
+## Example
+
+```ts
+let matrix: number[][] = [
+  [1, 2],
+  [3, 4]
+];
+
+console.log(matrix[0][1]);
+```
+
+---
+
+# Output
+
+```bash
+2
+```
+
+---
+
+# Readonly Arrays
+
+Readonly arrays cannot be modified.
+
+---
+
+## Example
+
+```ts
+const colors: readonly string[] = ["Red", "Blue"];
+```
+
+---
+
+# Invalid Operation
+
+```ts
+colors.push("Green");
+```
+
+This produces an error.
+
+---
+
+# What is a Tuple?
+
+A tuple stores fixed-length data with predefined types.
+
+---
+
+# Tuple Syntax
+
+```ts
+let tupleName: [type1, type2];
+```
+
+---
+
+# Basic Tuple Example
+
+```ts
+let student: [string, number];
+
+student = ["Ali", 22];
+```
+
+---
+
+# Access Tuple Values
+
+```ts
+console.log(student[0]);
+console.log(student[1]);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+22
+```
+
+---
+
+# Invalid Tuple Example
+
+```ts
+student = [22, "Ali"];
+```
+
+This produces a type error.
+
+---
+
+# Tuple with Multiple Types
+
+```ts
+let employee: [number, string, boolean];
+
+employee = [1, "Ahmed", true];
+```
+
+---
+
+# Optional Tuple Elements
+
+```ts
+let user: [string, number?];
+
+user = ["Ali"];
+```
+
+---
+
+# Readonly Tuples
+
+```ts
+const point: readonly [number, number] = [10, 20];
+```
+
+---
+
+# Array of Objects
+
+```ts
+let users: { name: string; age: number }[] = [
+  {
+    name: "Ali",
+    age: 22
+  },
+  {
+    name: "Ahmed",
+    age: 25
+  }
+];
+```
+
+---
+
+# Access Object Inside Array
+
+```ts
+console.log(users[0].name);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+```
+
+---
+
+# Array Destructuring
+
+```ts
+let colors: string[] = ["Red", "Blue", "Green"];
+
+let [first, second] = colors;
+
+console.log(first);
+console.log(second);
+```
+
+---
+
+# Output
+
+```bash
+Red
+Blue
+```
+
+---
+
+# Tuple Destructuring
+
+```ts
+let user: [string, number] = ["Ali", 22];
+
+let [name, age] = user;
+
+console.log(name);
+console.log(age);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+22
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Mixing types in arrays | Type errors |
+| Wrong tuple order | Invalid tuples |
+| Using any[] everywhere | Unsafe code |
+| Modifying readonly arrays | Compilation errors |
+
+---
+
+# Best Practices
+
+- Use typed arrays
+- Prefer readonly arrays when needed
+- Use tuples for fixed structures
+- Avoid unnecessary any[]
+- Use meaningful variable names
+- Keep array structures clean
+
+---
+
+# Complete Example
+
+```ts
+type Product = {
+  name: string;
+  price: number;
+};
+
+let products: Product[] = [
+  {
+    name: "Laptop",
+    price: 1000
+  },
+  {
+    name: "Phone",
+    price: 500
+  }
+];
+
+products.forEach(product => {
+  console.log(product.name);
+  console.log(product.price);
+});
+```
+
+---
+
+# Output
+
+```bash
+Laptop
+1000
+Phone
+500
+```
+
+---
+
+# Conclusion
+
+Arrays and tuples are essential data structures in TypeScript.
+
+Understanding them helps developers:
+
+- Store structured data
+- Create scalable applications
+- Improve type safety
+- Write professional code
+- Manage complex datasets efficiently
+
+
+# 7. Objects & Interfaces in TypeScript
+
+Objects and interfaces are used to structure and organize data in TypeScript applications.
+
+They help developers create:
+
+- Clean architecture
+- Reusable structures
+- Strongly typed applications
+- Scalable systems
+
+---
+
+# What is an Object?
+
+An object stores related data using key-value pairs.
+
+---
+
+# Basic Object Example
+
+```ts
+let user = {
+  name: "Ali",
+  age: 22
+};
+```
+
+---
+
+# Access Object Properties
+
+```ts
+console.log(user.name);
+console.log(user.age);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+22
+```
+
+---
+
+# Object Type Annotation
+
+TypeScript allows defining object types.
+
+---
+
+## Example
+
+```ts
+let student: {
+  name: string;
+  age: number;
+};
+```
+
+---
+
+# Assign Object Values
+
+```ts
+student = {
+  name: "Ahmed",
+  age: 25
+};
+```
+
+---
+
+# Invalid Object Example
+
+```ts
+student = {
+  name: "Ali",
+  age: "Twenty"
+};
+```
+
+This produces an error because `age` must be a number.
+
+---
+
+# Nested Objects
+
+Objects can contain other objects.
+
+---
+
+## Example
+
+```ts
+let employee = {
+  name: "Usman",
+  address: {
+    city: "Lahore",
+    country: "Pakistan"
+  }
+};
+```
+
+---
+
+# Access Nested Object
+
+```ts
+console.log(employee.address.city);
+```
+
+---
+
+# Output
+
+```bash
+Lahore
+```
+
+---
+
+# Optional Object Properties
+
+Optional properties use `?`.
+
+---
+
+## Example
+
+```ts
+let user: {
+  name: string;
+  age?: number;
+};
+
+user = {
+  name: "Ali"
+};
+```
+
+---
+
+# Readonly Properties
+
+Readonly properties cannot be modified.
+
+---
+
+## Example
+
+```ts
+let product: {
+  readonly id: number;
+  name: string;
+};
+
+product = {
+  id: 1,
+  name: "Laptop"
+};
+```
+
+---
+
+# Invalid Modification
+
+```ts
+product.id = 2;
+```
+
+This produces an error.
+
+---
+
+# Object Methods
+
+Objects can contain functions.
+
+---
+
+## Example
+
+```ts
+let person = {
+  name: "Ali",
+
+  greet() {
+    console.log(`Hello ${this.name}`);
+  }
+};
+
+person.greet();
+```
+
+---
+
+# Output
+
+```bash
+Hello Ali
+```
+
+---
+
+# What is an Interface?
+
+An interface defines the structure of an object.
+
+Interfaces help create reusable and scalable code.
+
+---
+
+# Basic Interface Syntax
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+```
+
+---
+
+# Using an Interface
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+
+let user: User = {
+  name: "Ahmed",
+  age: 22
+};
+```
+
+---
+
+# Benefits of Interfaces
+
+Interfaces provide:
+
+- Reusability
+- Better readability
+- Strong type safety
+- Cleaner architecture
+
+---
+
+# Optional Interface Properties
+
+```ts
+interface User {
+  name: string;
+  age?: number;
+}
+```
+
+---
+
+# Example Usage
+
+```ts
+let user: User = {
+  name: "Ali"
+};
+```
+
+---
+
+# Readonly Interface Properties
+
+```ts
+interface Product {
+  readonly id: number;
+  name: string;
+}
+```
+
+---
+
+# Example
+
+```ts
+let laptop: Product = {
+  id: 1,
+  name: "Dell"
+};
+```
+
+---
+
+# Interface with Methods
+
+```ts
+interface Person {
+  name: string;
+
+  greet(): void;
+}
+```
+
+---
+
+# Implementation Example
+
+```ts
+let user: Person = {
+  name: "Ali",
+
+  greet() {
+    console.log("Welcome");
+  }
+};
+```
+
+---
+
+# Output
+
+```bash
+Welcome
+```
+
+---
+
+# Extending Interfaces
+
+Interfaces can inherit from other interfaces.
+
+---
+
+## Example
+
+```ts
+interface Animal {
+  name: string;
+}
+
+interface Dog extends Animal {
+  breed: string;
+}
+```
+
+---
+
+# Usage
+
+```ts
+let pet: Dog = {
+  name: "Tommy",
+  breed: "German Shepherd"
+};
+```
+
+---
+
+# Multiple Interface Inheritance
+
+```ts
+interface Person {
+  name: string;
+}
+
+interface Employee {
+  salary: number;
+}
+
+interface Manager extends Person, Employee {
+  department: string;
+}
+```
+
+---
+
+# Example
+
+```ts
+let manager: Manager = {
+  name: "Ali",
+  salary: 50000,
+  department: "IT"
+};
+```
+
+---
+
+# Interfaces with Arrays
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+
+let users: User[] = [
+  {
+    name: "Ali",
+    age: 22
+  },
+  {
+    name: "Ahmed",
+    age: 25
+  }
+];
+```
+
+---
+
+# Interfaces with Functions
+
+```ts
+interface MathOperation {
+  (a: number, b: number): number;
+}
+```
+
+---
+
+# Example
+
+```ts
+const add: MathOperation = (a, b) => a + b;
+
+console.log(add(10, 5));
+```
+
+---
+
+# Output
+
+```bash
+15
+```
+
+---
+
+# Interface vs Type Alias
+
+| Interface | Type Alias |
+|---|---|
+| Best for objects | More flexible |
+| Extendable | Supports unions |
+| Cleaner for OOP | Better for advanced types |
+
+---
+
+# Interface with Class
+
+Interfaces can be implemented in classes.
+
+---
+
+## Example
+
+```ts
+interface User {
+  name: string;
+
+  greet(): void;
+}
+
+class Person implements User {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  greet(): void {
+    console.log(`Hello ${this.name}`);
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+const user = new Person("Ali");
+
+user.greet();
+```
+
+---
+
+# Output
+
+```bash
+Hello Ali
+```
+
+---
+
+# Dynamic Object Keys
+
+```ts
+interface Scores {
+  [key: string]: number;
+}
+```
+
+---
+
+# Example
+
+```ts
+let marks: Scores = {
+  math: 90,
+  english: 85
+};
+```
+
+---
+
+# Destructuring Objects
+
+```ts
+let user = {
+  name: "Ali",
+  age: 22
+};
+
+let { name, age } = user;
+
+console.log(name);
+console.log(age);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+22
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Missing required properties | Type errors |
+| Wrong property types | Invalid objects |
+| Using any objects | Unsafe code |
+| Ignoring interfaces | Poor scalability |
+
+---
+
+# Best Practices
+
+- Use interfaces for object structures
+- Use readonly when needed
+- Keep interfaces reusable
+- Use meaningful property names
+- Avoid overly large interfaces
+- Organize interfaces properly
+
+---
+
+# Real-world Example
+
+```ts
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  inStock: boolean;
+}
+
+const laptop: Product = {
+  id: 1,
+  name: "Dell XPS",
+  price: 1200,
+  inStock: true
+};
+
+console.log(laptop);
+```
+
+---
+
+# Output
+
+```bash
+{
+  id: 1,
+  name: 'Dell XPS',
+  price: 1200,
+  inStock: true
+}
+```
+
+---
+
+# Conclusion
+
+Objects and interfaces are fundamental parts of TypeScript development.
+
+They help developers create:
+
+- Structured applications
+- Reusable architectures
+- Type-safe systems
+- Professional codebases
+- Scalable software solutions
+
+# 8. Type Aliases & Advanced Types in TypeScript
+
+Type aliases and advanced types help developers create flexible, reusable, and scalable type structures.
+
+They improve:
+
+- Code readability
+- Reusability
+- Type safety
+- Application scalability
+
+---
+
+# What is a Type Alias?
+
+A type alias creates a custom name for a type.
+
+---
+
+# Basic Syntax
+
+```ts
+type TypeName = type;
+```
+
+---
+
+# Simple Type Alias
+
+```ts
+type UserName = string;
+
+let name: UserName = "Ali";
+```
+
+---
+
+# Number Alias
+
+```ts
+type Age = number;
+
+let userAge: Age = 22;
+```
+
+---
+
+# Object Type Alias
+
+```ts
+type User = {
+  name: string;
+  age: number;
+};
+```
+
+---
+
+# Usage
+
+```ts
+let user: User = {
+  name: "Ahmed",
+  age: 25
+};
+```
+
+---
+
+# Benefits of Type Aliases
+
+Type aliases help developers:
+
+- Reduce repeated code
+- Improve readability
+- Create reusable structures
+- Manage complex types
+
+---
+
+# Union Types
+
+Union types allow multiple possible types.
+
+---
+
+# Syntax
+
+```ts
+type TypeName = type1 | type2;
+```
+
+---
+
+# Example
+
+```ts
+type ID = string | number;
+
+let userId: ID;
+
+userId = 100;
+userId = "TS100";
+```
+
+---
+
+# Union Type with Functions
+
+```ts
+function printId(id: string | number) {
+  console.log(id);
+}
+```
+
+---
+
+# Example Usage
+
+```ts
+printId(100);
+printId("TS200");
+```
+
+---
+
+# Output
+
+```bash
+100
+TS200
+```
+
+---
+
+# Type Narrowing
+
+Type narrowing checks the actual type before use.
+
+---
+
+## Example
+
+```ts
+function process(value: string | number) {
+  if (typeof value === "string") {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+}
+```
+
+---
+
+# Output
+
+```bash
+HELLO
+10.00
+```
+
+---
+
+# Intersection Types
+
+Intersection types combine multiple types.
+
+---
+
+# Syntax
+
+```ts
+type NewType = Type1 & Type2;
+```
+
+---
+
+# Example
+
+```ts
+type Person = {
+  name: string;
+};
+
+type Employee = {
+  salary: number;
+};
+
+type Manager = Person & Employee;
+```
+
+---
+
+# Usage
+
+```ts
+let manager: Manager = {
+  name: "Ali",
+  salary: 50000
+};
+```
+
+---
+
+# Literal Types
+
+Literal types restrict exact values.
+
+---
+
+# Example
+
+```ts
+type Direction = "left" | "right";
+
+let move: Direction;
+
+move = "left";
+```
+
+---
+
+# Invalid Example
+
+```ts
+move = "up";
+```
+
+This produces an error.
+
+---
+
+# String Literal Types
+
+```ts
+type Role = "admin" | "user" | "guest";
+
+let currentRole: Role = "admin";
+```
+
+---
+
+# Number Literal Types
+
+```ts
+type Dice = 1 | 2 | 3 | 4 | 5 | 6;
+
+let value: Dice = 4;
+```
+
+---
+
+# Boolean Literal Types
+
+```ts
+type Status = true | false;
+```
+
+---
+
+# Type Aliases with Arrays
+
+```ts
+type Users = string[];
+
+let students: Users = ["Ali", "Ahmed"];
+```
+
+---
+
+# Type Aliases with Functions
+
+```ts
+type AddFunction = (
+  a: number,
+  b: number
+) => number;
+```
+
+---
+
+# Example
+
+```ts
+const add: AddFunction = (a, b) => a + b;
+```
+
+---
+
+# Nullable Types
+
+Nullable types allow `null`.
+
+---
+
+# Example
+
+```ts
+type User = string | null;
+
+let username: User = null;
+```
+
+---
+
+# Optional Types
+
+```ts
+type User = {
+  name: string;
+  age?: number;
+};
+```
+
+---
+
+# Readonly Types
+
+Readonly prevents modification.
+
+---
+
+# Example
+
+```ts
+type Product = {
+  readonly id: number;
+  name: string;
+};
+```
+
+---
+
+# Example Usage
+
+```ts
+let laptop: Product = {
+  id: 1,
+  name: "Dell"
+};
+```
+
+---
+
+# Invalid Modification
+
+```ts
+laptop.id = 2;
+```
+
+This produces an error.
+
+---
+
+# Function Return Union Types
+
+```ts
+function format(value: string | number): string {
+  return String(value);
+}
+```
+
+---
+
+# Complex Type Alias
+
+```ts
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  inStock: boolean;
+};
+```
+
+---
+
+# Example
+
+```ts
+const phone: Product = {
+  id: 1,
+  name: "iPhone",
+  price: 1200,
+  inStock: true
+};
+```
+
+---
+
+# Nested Type Aliases
+
+```ts
+type Address = {
+  city: string;
+  country: string;
+};
+
+type User = {
+  name: string;
+  address: Address;
+};
+```
+
+---
+
+# Example
+
+```ts
+const user: User = {
+  name: "Ali",
+  address: {
+    city: "Lahore",
+    country: "Pakistan"
+  }
+};
+```
+
+---
+
+# Type Assertions
+
+Type assertions tell TypeScript the exact type.
+
+---
+
+# Example
+
+```ts
+let value: unknown = "Hello";
+
+let length: number = (value as string).length;
+```
+
+---
+
+# Output
+
+```bash
+5
+```
+
+---
+
+# Discriminated Unions
+
+Discriminated unions are useful for handling multiple object types.
+
+---
+
+# Example
+
+```ts
+type Circle = {
+  type: "circle";
+  radius: number;
+};
+
+type Square = {
+  type: "square";
+  side: number;
+};
+
+type Shape = Circle | Square;
+```
+
+---
+
+# Usage
+
+```ts
+function area(shape: Shape) {
+  if (shape.type === "circle") {
+    return 3.14 * shape.radius ** 2;
+  }
+
+  return shape.side * shape.side;
+}
+```
+
+---
+
+# Utility Types
+
+TypeScript provides built-in utility types.
+
+---
+
+# Partial
+
+Makes all properties optional.
+
+```ts
+type User = {
+  name: string;
+  age: number;
+};
+
+type PartialUser = Partial<User>;
+```
+
+---
+
+# Required
+
+Makes all properties required.
+
+```ts
+type RequiredUser = Required<User>;
+```
+
+---
+
+# Readonly
+
+Makes properties readonly.
+
+```ts
+type ReadonlyUser = Readonly<User>;
+```
+
+---
+
+# Pick
+
+Selects specific properties.
+
+```ts
+type User = {
+  name: string;
+  age: number;
+  email: string;
+};
+
+type UserPreview = Pick<User, "name" | "email">;
+```
+
+---
+
+# Omit
+
+Removes specific properties.
+
+```ts
+type UserWithoutEmail = Omit<User, "email">;
+```
+
+---
+
+# Record
+
+Creates object types dynamically.
+
+```ts
+type Users = Record<string, number>;
+```
+
+---
+
+# Example
+
+```ts
+const scores: Users = {
+  Ali: 90,
+  Ahmed: 85
+};
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Overusing any | Unsafe code |
+| Complex unions everywhere | Hard readability |
+| Ignoring type narrowing | Runtime issues |
+| Wrong literal values | Type errors |
+
+---
+
+# Best Practices
+
+- Use reusable type aliases
+- Prefer union types over any
+- Keep types readable
+- Use utility types properly
+- Use readonly where needed
+- Organize types in separate files
+
+---
+
+# Real-world Example
+
+```ts
+type UserRole = "admin" | "editor" | "user";
+
+type User = {
+  id: number;
+  name: string;
+  role: UserRole;
+};
+
+const currentUser: User = {
+  id: 1,
+  name: "Ali",
+  role: "admin"
+};
+
+console.log(currentUser);
+```
+
+---
+
+# Output
+
+```bash
+{
+  id: 1,
+  name: 'Ali',
+  role: 'admin'
+}
+```
+
+---
+
+# Conclusion
+
+Type aliases and advanced types are powerful TypeScript features that help developers build:
+
+- Flexible applications
+- Reusable architectures
+- Strongly typed systems
+- Professional codebases
+- Scalable enterprise applications
+
+# 9. Enums in TypeScript
+
+Enums are used to store a collection of related constant values.
+
+Enums make code:
+
+- More readable
+- Easier to manage
+- More maintainable
+- Better structured
+
+---
+
+# What is an Enum?
+
+Enum stands for "Enumeration".
+
+It allows developers to define a set of named constants.
+
+---
+
+# Why Use Enums?
+
+Enums help developers:
+
+- Avoid hardcoded values
+- Improve readability
+- Create meaningful constants
+- Reduce coding mistakes
+
+---
+
+# Basic Enum Syntax
+
+```ts
+enum EnumName {
+  VALUE1,
+  VALUE2,
+  VALUE3
+}
+```
+
+---
+
+# Numeric Enum
+
+By default, enums use numeric values starting from `0`.
+
+---
+
+# Example
+
+```ts
+enum Role {
+  Admin,
+  User,
+  Guest
+}
+```
+
+---
+
+# Access Enum Values
+
+```ts
+console.log(Role.Admin);
+console.log(Role.User);
+console.log(Role.Guest);
+```
+
+---
+
+# Output
+
+```bash
+0
+1
+2
+```
+
+---
+
+# Access Enum Names
+
+```ts
+console.log(Role[0]);
+console.log(Role[1]);
+```
+
+---
+
+# Output
+
+```bash
+Admin
+User
+```
+
+---
+
+# Assign Enum Value to Variable
+
+```ts
+enum Status {
+  Active,
+  Inactive
+}
+
+let currentStatus: Status = Status.Active;
+
+console.log(currentStatus);
+```
+
+---
+
+# Output
+
+```bash
+0
+```
+
+---
+
+# Custom Numeric Enum Values
+
+Enum values can be customized.
+
+---
+
+# Example
+
+```ts
+enum Direction {
+  Up = 1,
+  Down = 2,
+  Left = 3,
+  Right = 4
+}
+```
+
+---
+
+# Output Example
+
+```ts
+console.log(Direction.Left);
+```
+
+```bash
+3
+```
+
+---
+
+# Auto Increment Behavior
+
+After defining the first value, TypeScript auto-increments the rest.
+
+---
+
+# Example
+
+```ts
+enum Level {
+  Low = 1,
+  Medium,
+  High
+}
+```
+
+---
+
+# Values
+
+```bash
+Low = 1
+Medium = 2
+High = 3
+```
+
+---
+
+# String Enums
+
+String enums store string values.
+
+---
+
+# Example
+
+```ts
+enum UserRole {
+  Admin = "ADMIN",
+  User = "USER",
+  Guest = "GUEST"
+}
+```
+
+---
+
+# Usage
+
+```ts
+console.log(UserRole.Admin);
+```
+
+---
+
+# Output
+
+```bash
+ADMIN
+```
+
+---
+
+# Why String Enums are Useful
+
+String enums are easier to debug because values are readable.
+
+---
+
+# Mixed Enums
+
+Enums can contain both numbers and strings.
+
+---
+
+# Example
+
+```ts
+enum Result {
+  Success = "SUCCESS",
+  Failed = 0
+}
+```
+
+---
+
+# Const Enums
+
+`const enum` improves performance because TypeScript removes extra generated code.
+
+---
+
+# Example
+
+```ts
+const enum Color {
+  Red,
+  Blue,
+  Green
+}
+
+let selected = Color.Blue;
+```
+
+---
+
+# Benefits of const enum
+
+- Faster performance
+- Smaller compiled code
+- Better optimization
+
+---
+
+# Enum with Functions
+
+Enums can be used inside functions.
+
+---
+
+# Example
+
+```ts
+enum PaymentStatus {
+  Pending,
+  Completed,
+  Failed
+}
+
+function checkStatus(status: PaymentStatus) {
+  console.log(status);
+}
+
+checkStatus(PaymentStatus.Completed);
+```
+
+---
+
+# Output
+
+```bash
+1
+```
+
+---
+
+# Enums with Conditions
+
+```ts
+enum Role {
+  Admin,
+  User
+}
+
+let currentRole: Role = Role.Admin;
+
+if (currentRole === Role.Admin) {
+  console.log("Access Granted");
+}
+```
+
+---
+
+# Output
+
+```bash
+Access Granted
+```
+
+---
+
+# Enum in Objects
+
+```ts
+enum OrderStatus {
+  Pending,
+  Delivered
+}
+
+type Order = {
+  id: number;
+  status: OrderStatus;
+};
+```
+
+---
+
+# Example
+
+```ts
+const order: Order = {
+  id: 1,
+  status: OrderStatus.Pending
+};
+```
+
+---
+
+# Enum in Arrays
+
+```ts
+enum Category {
+  Electronics,
+  Clothing,
+  Food
+}
+
+let categories: Category[] = [
+  Category.Electronics,
+  Category.Food
+];
+```
+
+---
+
+# Reverse Mapping
+
+Numeric enums support reverse mapping.
+
+---
+
+# Example
+
+```ts
+enum Status {
+  Active,
+  Inactive
+}
+
+console.log(Status[0]);
+```
+
+---
+
+# Output
+
+```bash
+Active
+```
+
+---
+
+# Enum vs Object
+
+| Enum | Object |
+|---|---|
+| Built for constants | General-purpose |
+| Better readability | More flexible |
+| Type-safe | Less strict |
+
+---
+
+# Real-world Enum Example
+
+```ts
+enum AccountType {
+  Saving = "SAVING",
+  Current = "CURRENT"
+}
+
+type BankAccount = {
+  id: number;
+  type: AccountType;
+};
+```
+
+---
+
+# Usage
+
+```ts
+const account: BankAccount = {
+  id: 1,
+  type: AccountType.Saving
+};
+
+console.log(account);
+```
+
+---
+
+# Output
+
+```bash
+{
+  id: 1,
+  type: 'SAVING'
+}
+```
+
+---
+
+# Enum with Switch Statement
+
+```ts
+enum TrafficLight {
+  Red,
+  Yellow,
+  Green
+}
+
+function action(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.Red:
+      console.log("Stop");
+      break;
+
+    case TrafficLight.Yellow:
+      console.log("Ready");
+      break;
+
+    case TrafficLight.Green:
+      console.log("Go");
+      break;
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+action(TrafficLight.Green);
+```
+
+---
+
+# Output
+
+```bash
+Go
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Using enums for simple values | Unnecessary complexity |
+| Mixing unrelated values | Poor readability |
+| Overusing numeric enums | Hard debugging |
+| Ignoring string enums | Less readable code |
+
+---
+
+# Best Practices
+
+- Prefer string enums in large projects
+- Use meaningful enum names
+- Group related constants together
+- Use const enums for optimization
+- Avoid unnecessary enums
+
+---
+
+# Enum Naming Conventions
+
+## Good Example
+
+```ts
+enum UserRole {}
+enum PaymentStatus {}
+```
+
+---
+
+## Bad Example
+
+```ts
+enum data {}
+enum test {}
+```
+
+---
+
+# Complete Example
+
+```ts
+enum UserRole {
+  Admin = "ADMIN",
+  Editor = "EDITOR",
+  User = "USER"
+}
+
+type User = {
+  name: string;
+  role: UserRole;
+};
+
+const currentUser: User = {
+  name: "Ali",
+  role: UserRole.Admin
+};
+
+console.log(currentUser);
+```
+
+---
+
+# Output
+
+```bash
+{
+  name: 'Ali',
+  role: 'ADMIN'
+}
+```
+
+---
+
+# Advantages of Enums
+
+- Better readability
+- Cleaner code
+- Easier maintenance
+- Strong type safety
+- Reduced hardcoded values
+
+---
+
+# Limitations of Enums
+
+- Extra generated JavaScript code
+- Can increase complexity if overused
+- Numeric enums can be confusing
+
+---
+
+# Conclusion
+
+Enums are powerful tools for managing constant values in TypeScript applications.
+
+They help developers create:
+
+- Professional codebases
+- Readable applications
+- Maintainable systems
+- Scalable architectures
+- Cleaner business logic
+
+# 10. Classes & OOP in TypeScript
+
+TypeScript fully supports Object-Oriented Programming (OOP).
+
+OOP helps developers build:
+
+- Scalable applications
+- Reusable code
+- Maintainable systems
+- Professional architectures
+
+---
+
+# What is Object-Oriented Programming?
+
+Object-Oriented Programming is a programming style based on objects and classes.
+
+OOP focuses on:
+
+- Reusability
+- Modularity
+- Encapsulation
+- Abstraction
+- Inheritance
+
+---
+
+# Main OOP Concepts
+
+| Concept | Purpose |
+|---|---|
+| Class | Blueprint for objects |
+| Object | Instance of a class |
+| Encapsulation | Protect data |
+| Inheritance | Reuse code |
+| Polymorphism | Multiple behaviors |
+| Abstraction | Hide implementation details |
+
+---
+
+# What is a Class?
+
+A class is a blueprint used to create objects.
+
+---
+
+# Basic Class Syntax
+
+```ts
+class ClassName {
+  // properties
+  // methods
+}
+```
+
+---
+
+# Create First Class
+
+```ts
+class User {
+  name: string = "Ali";
+}
+```
+
+---
+
+# Create Object
+
+```ts
+const user = new User();
+
+console.log(user.name);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+```
+
+---
+
+# Class Properties
+
+Properties store object data.
+
+---
+
+# Example
+
+```ts
+class Product {
+  name: string = "Laptop";
+  price: number = 1000;
+}
+```
+
+---
+
+# Access Properties
+
+```ts
+const item = new Product();
+
+console.log(item.name);
+console.log(item.price);
+```
+
+---
+
+# Output
+
+```bash
+Laptop
+1000
+```
+
+---
+
+# Constructors
+
+Constructors initialize object values.
+
+---
+
+# Constructor Syntax
+
+```ts
+constructor() {
+  // initialization
+}
+```
+
+---
+
+# Example
+
+```ts
+class User {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+```
+
+---
+
+# Create Object
+
+```ts
+const user = new User("Ahmed");
+
+console.log(user.name);
+```
+
+---
+
+# Output
+
+```bash
+Ahmed
+```
+
+---
+
+# this Keyword
+
+`this` refers to the current object instance.
+
+---
+
+# Example
+
+```ts
+class Student {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  greet() {
+    console.log(`Hello ${this.name}`);
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+const student = new Student("Ali");
+
+student.greet();
+```
+
+---
+
+# Output
+
+```bash
+Hello Ali
+```
+
+---
+
+# Methods in Classes
+
+Methods define object behavior.
+
+---
+
+# Example
+
+```ts
+class Calculator {
+  add(a: number, b: number): number {
+    return a + b;
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+const calc = new Calculator();
+
+console.log(calc.add(10, 5));
+```
+
+---
+
+# Output
+
+```bash
+15
+```
+
+---
+
+# Access Modifiers
+
+Access modifiers control property visibility.
+
+---
+
+# Types of Access Modifiers
+
+| Modifier | Access Level |
+|---|---|
+| public | Accessible everywhere |
+| private | Accessible only inside class |
+| protected | Accessible inside class and subclasses |
+
+---
+
+# Public Modifier
+
+`public` is the default modifier.
+
+---
+
+# Example
+
+```ts
+class User {
+  public name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+```
+
+---
+
+# Private Modifier
+
+Private properties cannot be accessed outside the class.
+
+---
+
+# Example
+
+```ts
+class Account {
+  private balance: number = 1000;
+}
+```
+
+---
+
+# Invalid Access
+
+```ts
+const account = new Account();
+
+console.log(account.balance);
+```
+
+This produces an error.
+
+---
+
+# Protected Modifier
+
+Protected members are accessible in subclasses.
+
+---
+
+# Example
+
+```ts
+class Animal {
+  protected name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+```
+
+---
+
+# Parameter Properties
+
+TypeScript provides shorthand constructor syntax.
+
+---
+
+# Example
+
+```ts
+class User {
+  constructor(
+    public name: string,
+    public age: number
+  ) {}
+}
+```
+
+---
+
+# Usage
+
+```ts
+const user = new User("Ali", 22);
+
+console.log(user.name);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+```
+
+---
+
+# Readonly Properties
+
+Readonly properties cannot be modified after initialization.
+
+---
+
+# Example
+
+```ts
+class Product {
+  readonly id: number;
+
+  constructor(id: number) {
+    this.id = id;
+  }
+}
+```
+
+---
+
+# Invalid Modification
+
+```ts
+product.id = 2;
+```
+
+This produces an error.
+
+---
+
+# Inheritance
+
+Inheritance allows one class to reuse another class.
+
+---
+
+# Basic Syntax
+
+```ts
+class Child extends Parent {}
+```
+
+---
+
+# Example
+
+```ts
+class Animal {
+  move() {
+    console.log("Moving");
+  }
+}
+
+class Dog extends Animal {
+  bark() {
+    console.log("Barking");
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+const dog = new Dog();
+
+dog.move();
+dog.bark();
+```
+
+---
+
+# Output
+
+```bash
+Moving
+Barking
+```
+
+---
+
+# Method Overriding
+
+Subclass methods can override parent methods.
+
+---
+
+# Example
+
+```ts
+class Animal {
+  sound() {
+    console.log("Animal Sound");
+  }
+}
+
+class Cat extends Animal {
+  sound() {
+    console.log("Meow");
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+const cat = new Cat();
+
+cat.sound();
+```
+
+---
+
+# Output
+
+```bash
+Meow
+```
+
+---
+
+# super Keyword
+
+`super` calls parent class methods or constructors.
+
+---
+
+# Example
+
+```ts
+class Person {
+  constructor(public name: string) {}
+}
+
+class Employee extends Person {
+  constructor(
+    name: string,
+    public salary: number
+  ) {
+    super(name);
+  }
+}
+```
+
+---
+
+# Abstract Classes
+
+Abstract classes cannot be instantiated directly.
+
+---
+
+# Example
+
+```ts
+abstract class Shape {
+  abstract area(): number;
+}
+```
+
+---
+
+# Implement Abstract Class
+
+```ts
+class Circle extends Shape {
+  area(): number {
+    return 3.14 * 5 * 5;
+  }
+}
+```
+
+---
+
+# Interfaces with Classes
+
+Classes can implement interfaces.
+
+---
+
+# Example
+
+```ts
+interface User {
+  name: string;
+
+  greet(): void;
+}
+
+class Person implements User {
+  constructor(public name: string) {}
+
+  greet(): void {
+    console.log(`Hello ${this.name}`);
+  }
+}
+```
+
+---
+
+# Static Properties & Methods
+
+Static members belong to the class itself.
+
+---
+
+# Example
+
+```ts
+class MathUtils {
+  static PI: number = 3.14;
+
+  static square(num: number): number {
+    return num * num;
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+console.log(MathUtils.PI);
+console.log(MathUtils.square(5));
+```
+
+---
+
+# Output
+
+```bash
+3.14
+25
+```
+
+---
+
+# Getters & Setters
+
+Getters and setters control property access.
+
+---
+
+# Example
+
+```ts
+class User {
+  private _name: string = "";
+
+  get name(): string {
+    return this._name;
+  }
+
+  set name(value: string) {
+    this._name = value;
+  }
+}
+```
+
+---
+
+# Usage
+
+```ts
+const user = new User();
+
+user.name = "Ali";
+
+console.log(user.name);
+```
+
+---
+
+# Output
+
+```bash
+Ali
+```
+
+---
+
+# Object Destructuring
+
+```ts
+class Product {
+  constructor(
+    public name: string,
+    public price: number
+  ) {}
+}
+
+const laptop = new Product("Dell", 1200);
+
+const { name, price } = laptop;
+
+console.log(name);
+console.log(price);
+```
+
+---
+
+# Output
+
+```bash
+Dell
+1200
+```
+
+---
+
+# Common Beginner Mistakes
+
+| Mistake | Problem |
+|---|---|
+| Not using constructors properly | Initialization issues |
+| Overusing public properties | Weak encapsulation |
+| Ignoring interfaces | Poor scalability |
+| Large classes | Hard maintenance |
+
+---
+
+# Best Practices
+
+- Keep classes focused
+- Use interfaces where needed
+- Prefer private properties
+- Use readonly when possible
+- Avoid massive classes
+- Follow SOLID principles
+
+---
+
+# Real-world Example
+
+```ts
+class BankAccount {
+  constructor(
+    public accountHolder: string,
+    private balance: number
+  ) {}
+
+  deposit(amount: number): void {
+    this.balance += amount;
+  }
+
+  getBalance(): number {
+    return this.balance;
+  }
+}
+
+const account = new BankAccount(
+  "Ali",
+  1000
+);
+
+account.deposit(500);
+
+console.log(account.getBalance());
+```
+
+---
+
+# Output
+
+```bash
+1500
+```
+
+---
+
+# Advantages of OOP
+
+- Better code organization
+- Reusability
+- Scalability
+- Maintainability
+- Professional architecture
+
+---
+
+# Conclusion
+
+Classes and OOP are essential for professional TypeScript development.
+
+Understanding OOP helps developers build:
+
+- Enterprise applications
+- Scalable systems
+- Reusable architectures
+- Maintainable codebases
+- Professional software solutions
 
 
 
